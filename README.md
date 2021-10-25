@@ -5,7 +5,7 @@ change 2
 > Цитата 2  
 
 ## terraform .gitignore
-1. Локальная дирректория terraform и все её содержимое  
+1. Локальная дирректория .terraform и все её содержимое  
 2. Все файлв tfstate  
 3. Файл crash.log  
 4. Все фалы с расширением tfvars  
