@@ -1,7 +1,7 @@
 # DevOps-netology
 
-Найти commit по названию
-Посмотреть изменения commita
+Найти commit по названию   
+Посмотреть изменения commita   
 ```
 git log --grep="Prepare to delete and move"   
 
