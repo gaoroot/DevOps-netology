@@ -5,7 +5,12 @@ change 2
 > Цитата 2  
 > Тест
 
-git diff
+```
+git diff  
+```
+```
+git commit -v  
+```
 
 ## terraform .gitignore
 1. Локальная дирректория .terraform и все её содержимое  
