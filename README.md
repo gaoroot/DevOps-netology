@@ -3,6 +3,9 @@ change 1
 change 2   
 > Цитата 1  
 > Цитата 2  
+> Тест
+
+git diff
 
 ## terraform .gitignore
 1. Локальная дирректория .terraform и все её содержимое  
