@@ -1,9 +1,12 @@
 # DevOps-netology
-change 1   
-change 2   
-> Цитата 1  
-> Цитата 2  
-> Тест
+
+Найти commit по названию
+Посмотреть изменения commita
+```
+git log --grep="Prepare to delete and move"   
+
+git show ebdc652
+```
 
 ```
 git diff  
