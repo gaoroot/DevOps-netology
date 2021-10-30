@@ -1,5 +1,3 @@
-[![GitHub last commit](https://img.shields.io/github/last-commit/gaoroot/DevOps-netology)]()
-
 # DevOps-netology
 
 Найти commit по названию   
@@ -24,3 +22,6 @@ git commit -v
 4. Все фалы с расширением tfvars  
 5. Файлы override  
 6. Фалы terraformrc и terraform.rc  
+
+
+![GitHub last commit](https://img.shields.io/github/last-commit/gaoroot/DevOps-netology)
