@@ -1,4 +1,6 @@
-[![GitHub Release](https://img.shields.io/github/release/tterb/PlayMusic.svg?style=flat)]()  
+[![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg?style=flat)]()
+
+![Your Repository’s Stats](https://github-readme-stats.vercel.app/api?username=gaoroot&show_icons=true)
 
 # DevOps-netology
 
