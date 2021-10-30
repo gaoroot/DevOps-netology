@@ -1,4 +1,4 @@
-![example workflow](https://github.com/<OWNER>/<REPOSITORY>/actions/workflows/<WORKFLOW_FILE>/badge.svg)
+[![GitHub Release](https://img.shields.io/github/release/tterb/PlayMusic.svg?style=flat)]()  
 
 # DevOps-netology
 
