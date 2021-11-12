@@ -92,6 +92,16 @@ getconf ARG_MAX
 
 9. Добейтесь в выводе type -a bash в виртуальной машине наличия первым пунктом в списке `bash is /tmp/new_path_directory/bash`:
 
+![new_path_directory.](./img/new_path_directory.png)
+
+```
+mkdir /tmp/new_path_directory   
+sudo cp /bin/bash /tmp/new_path_directory   
+sudo nano /etc/shells   
+exec bash
+```
+
+
 Опция `-a` показывает все места которые содержат команду 
 Например:
 ```
