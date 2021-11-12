@@ -109,7 +109,7 @@ vagrant@vagrant:~$ [[ -d /tmp/test/test ]] && echo dir
 
 
 ```
-[ [[: ](https://www.gnu.org/software/bash/manual/html_node/Conditional-Constructs.html#index-_005b_005b)
+[ "[[" ](https://www.gnu.org/software/bash/manual/html_node/Conditional-Constructs.html#index-_005b_005b)
 
 [	Conditional Constructs ](https://www.gnu.org/software/bash/manual/html_node/Conditional-Constructs.html)
 
