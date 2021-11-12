@@ -88,7 +88,28 @@ getconf ARG_MAX
 
 8. В man bash поищите по `/\[\[`. Что делает конструкция `[[ -d /tmp ]]`
 
+```
+[ — это алиас встроенной команды test.   
+[[ — более продвинутая версия.  
 
+[ использует для проверки строк на совпадение операторы = и !=.  
+[[ использует ==, != и =~, при этом правый аргумент расценивается как регулярное выражение, а не как строка, если не взят в кавычки.   
+
+vagrant@vagrant:~$ [[ -d /test ]] && echo dir
+vagrant@vagrant:~$ [[ -d /tmp ]] && echo dir
+dir
+
+mkdit /tmp/test
+
+vagrant@vagrant:~$ [[ -d /tmp ]] && echo dir
+dir
+vagrant@vagrant:~$ [[ -d /tmp/test ]] && echo dir
+dir
+vagrant@vagrant:~$ [[ -d /tmp/test/test ]] && echo dir
+
+
+```
+   
 
 9. Добейтесь в выводе type -a bash в виртуальной машине наличия первым пунктом в списке `bash is /tmp/new_path_directory/bash`:
 
