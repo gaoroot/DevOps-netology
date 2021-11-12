@@ -40,9 +40,16 @@ end
 ```
 Manual page bash(1) line 835/4459 20%
 ```
+Отредактировать значение переменных в `.bashrc`
+```
+HISTSIZE=20000
+HISTFILESIZE=200000
+```
+
 ![vistsize.](./img/histsize.png)
 
 
+   
 5. Что делает директива `ignoreboth` в bash?
 
 ```
