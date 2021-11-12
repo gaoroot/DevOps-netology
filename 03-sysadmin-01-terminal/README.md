@@ -109,7 +109,9 @@ vagrant@vagrant:~$ [[ -d /tmp/test/test ]] && echo dir
 
 
 ```
-   
+[[[](https://www.gnu.org/software/bash/manual/html_node/Conditional-Constructs.html#index-_005b_005b)
+
+[	Conditional Constructs](https://www.gnu.org/software/bash/manual/html_node/Conditional-Constructs.html)
 
 9. Добейтесь в выводе type -a bash в виртуальной машине наличия первым пунктом в списке `bash is /tmp/new_path_directory/bash`:
 
