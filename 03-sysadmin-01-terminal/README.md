@@ -11,18 +11,45 @@
 
 2. Какие ресурсы выделены по-умолчанию?
 
+Оперативная память: 1024 МБ   
+Процессоры: 2  
+  
 
 3. Как добавить оперативной памяти или ресурсов процессора виртуальной машине?
 
+добавить оперативной пямяти и процессоров: 
+```
+v.memory = 2048
+v.cpus = 4
+```
+      
+`Vagrantfile`: 
+
+```
+Vagrant.configure("2") do |config|
+  config.vm.box = "bento/ubuntu-20.04"
+    config.vm.provider "virtualbox" do |v|
+      v.memory = 2048
+      v.cpus = 4
+  end
+end
+```
 
 4.Какой переменной можно задать длину журнала `history`, и на какой строчке manual это описывается?
 
 ```
 Manual page bash(1) line 835/4459 20%
 ```
+Отредактировать значение переменных в `.bashrc`
+```
+HISTSIZE=20000
+HISTFILESIZE=200000
+```
+
 ![vistsize.](./img/histsize.png)
 
 
+   
 5. Что делает директива `ignoreboth` в bash?
 
 ```
@@ -61,9 +88,42 @@ getconf ARG_MAX
 
 8. В man bash поищите по `/\[\[`. Что делает конструкция `[[ -d /tmp ]]`
 
+```
+[ — это алиас встроенной команды test.   
+[[ — более продвинутая версия.  
+
+[ использует для проверки строк на совпадение операторы = и !=.  
+[[ использует ==, != и =~, при этом правый аргумент расценивается как регулярное выражение, а не как строка, если не взят в кавычки.   
+
+vagrant@vagrant:~$ [[ -d /test ]] && echo dir
+vagrant@vagrant:~$ [[ -d /tmp ]] && echo dir
+dir
+
+mkdit /tmp/test
+
+vagrant@vagrant:~$ [[ -d /tmp ]] && echo dir
+dir
+vagrant@vagrant:~$ [[ -d /tmp/test ]] && echo dir
+dir
+vagrant@vagrant:~$ [[ -d /tmp/test/test ]] && echo dir
 
 
-9. Добейтесь в выводе type -a bash в виртуальной машине наличия первым пунктом в списке:
+```
+[ [[…]] ](https://www.gnu.org/software/bash/manual/html_node/Conditional-Constructs.html#index-_005b_005b)
+
+[	Conditional Constructs ](https://www.gnu.org/software/bash/manual/html_node/Conditional-Constructs.html)
+
+9. Добейтесь в выводе type -a bash в виртуальной машине наличия первым пунктом в списке `bash is /tmp/new_path_directory/bash`:
+
+![new_path_directory.](./img/new_path_directory.png)
+
+```
+mkdir /tmp/new_path_directory   
+sudo cp /bin/bash /tmp/new_path_directory   
+sudo nano /etc/shells   
+exec bash
+```
+
 
 Опция `-a` показывает все места которые содержат команду 
 Например:
