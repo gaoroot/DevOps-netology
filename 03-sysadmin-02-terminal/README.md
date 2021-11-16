@@ -78,7 +78,7 @@ ls: cannot access '%': No such file or directory
 
 ```
 
-![Терминал 1](/img/term1.png)
+![Терминал 1](img/term1.png)
 
 Терминал 2
 ```
@@ -87,7 +87,7 @@ ls: cannot access '%': No such file or directory
 
 ```
 
-![Терминал 2](/img/term2.png)
+![Терминал 2](img/term2.png)
 
 
 
@@ -109,9 +109,9 @@ ls: cannot access '%': No such file or directory
 ls % 2>&1 | tee /dev/tty6 
 ```
 
-![pts2](/img/pts2.png)
+![pts2](img/pts2.png)
 
-![tty6](/img/tty6.jpg)
+![tty6](img/tty6.jpg)
 
 
 7. Выполните команду bash 5>&1. К чему она приведет? Что будет, если вы выполните echo netology > /proc/$$/fd/5? Почему так происходит?
