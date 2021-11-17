@@ -175,9 +175,31 @@ cat /proc/cpuinfo | grep sse
 P.S.:
 `lshw -class processor | grep -w sse`
 
-12. 
+12. При открытии нового окна терминала и `vagrant ssh` создается новая сессия и выделяется `pty`. Это можно подтвердить командой `tty`, которая упоминалась в лекции 3.2   
 
-13. 
+`ssh localhost | tee 'tty'`
+
+![ssh localhost tty](img/ssh-tty.png)
+
+
+13. Бывает, что есть необходимость переместить запущенный процесс из одной сессии в другую. Попробуйте сделать это, воспользовавшись `reptyr`. Например, так можно перенести в `screen` процесс, который вы запустили по ошибке в обычной SSH-сессии.   
+
+
+```
+vagrant@vagrant:~$ tty
+/dev/pts/0
+vagrant@vagrant:~$ top
+```
+
+```
+vagrant@vagrant:~$ tty
+/dev/pts/1
+vagrant@vagrant:~$ ps -a
+    PID TTY          TIME CMD
+   1111 pts/0    00:00:00 top
+   1112 pts/1    00:00:00 ps
+vagrant@vagrant:~$ reptyr 1111
+```
 
 14. `sudo tee`
 `sudo echo string > /root/new_file`
