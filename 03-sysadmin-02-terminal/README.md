@@ -134,14 +134,14 @@ ls: cannot access '%': No such file or directory
 >test
 >netology
 >```
->>
->>vagrant@vagrant:~/test3$ cat <file1.txt >file2.txt
->>vagrant@vagrant:~/test3$ ls
->>file1.txt  file2.txt
->>vagrant@vagrant:~/test3$ cat file2.txt 
->>text1 
->>text2
->>text3
+>>  
+>>vagrant@vagrant:~/test3$ cat <file1.txt >file2.txt  
+>>vagrant@vagrant:~/test3$ ls  
+>>file1.txt  file2.txt  
+>>vagrant@vagrant:~/test3$ cat file2.txt   
+>>text1   
+>>text2  
+>>text3  
 
 ```
 vagrant@vagrant:~/test$ cat error.log 1>&1 | tee netology.txt
