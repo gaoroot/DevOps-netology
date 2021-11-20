@@ -120,6 +120,10 @@ ls: cannot access '%': No such file or directory
 >test
 >netology
 >
+>vagrant@vagrant:~/test$ cat test.txt > netology.txt 0>&1
+>test
+>netology
+>
 >vagrant@vagrant:~/test$ cat test.txt 0>&1 netology.txt                                          
 >test
 >netology
