@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 
-my_file = open('lsof.log', 'w')
+lsof_log = open('lsof.log', 'w')
 
-text_for_file = "message\n"
+lsof_m = "message\n"
 
 for i in range(9999999999999999999999999999999999):
-    my_file.write(text_for_file)
+    lsof_log.write(lsof_m)
 
-my_file.close()
+lsof_log.close()
