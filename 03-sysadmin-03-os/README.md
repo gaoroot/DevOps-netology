@@ -1,4 +1,7 @@
-### 1.  Какой системный вызов делает команда `cd`?   
+#### 1.  Какой системный вызов делает команда `cd`?   
+
+chdir("/tmp")                           = 0
+
 ```
 vagrant@vagrant:~/test3$ strace /bin/bash -c 'cd /tmp' > out-strace.log 2>&1 
 vagrant@vagrant:~/test3$ cat out-strace.log | grep /tmp
@@ -7,8 +10,7 @@ stat("/tmp", {st_mode=S_IFDIR|S_ISVTX|0777, st_size=4096, ...}) = 0
 chdir("/tmp")                           = 0
 ```
 
-
-### 2. ... Используя `strace` выясните, где находится база данных file на основании которой она делает свои догадки. ....
+#### 2. ... Используя `strace` выясните, где находится база данных file на основании которой она делает свои догадки. ....
 ```
 vagrant@vagrant:~/test3$ strace file
 ...
@@ -17,7 +19,7 @@ openat(AT_FDCWD, "/usr/share/misc/magic.mgc", O_RDONLY) = 3
 vagrant@vagrant:~/test3$ file /usr/share/file/magic.mgc  
 /usr/share/file/magic.mgc: symbolic link to ../../lib/file/magic.mgc  
 ```
-### 3.  Предположим, приложение пишет лог в текстовый файл. Этот файл оказался удален (deleted в lsof), однако возможности сигналом сказать приложению переоткрыть файлы или просто перезапустить приложение – нет. Так как приложение продолжает писать в удаленный файл, место на диске постепенно заканчивается. Основываясь на знаниях о перенаправлении потоков предложите способ обнуления открытого удаленного файла (чтобы освободить место на файловой системе).   
+#### 3.  Предположим, приложение пишет лог в текстовый файл. Этот файл оказался удален (deleted в lsof), однако возможности сигналом сказать приложению переоткрыть файлы или просто перезапустить приложение – нет. Так как приложение продолжает писать в удаленный файл, место на диске постепенно заканчивается. Основываясь на знаниях о перенаправлении потоков предложите способ обнуления открытого удаленного файла (чтобы освободить место на файловой системе).   
 
 
 ```
@@ -75,7 +77,7 @@ total 0
 ```
 
 
-### 4. Занимают ли зомби-процессы какие-то ресурсы в ОС (CPU, RAM, IO)?
+#### 4. Занимают ли зомби-процессы какие-то ресурсы в ОС (CPU, RAM, IO)?
 
 Нет  
 
@@ -96,7 +98,7 @@ vagrant@vagrant:~/test3$ top
 ...
 ```
 
-### 5. В iovisor BCC есть утилита `opensnoop`:   
+#### 5. В iovisor BCC есть утилита `opensnoop`:   
 
 ```
 vagrant@vagrant:~/test3$ dpkg -L bpfcc-tools | grep sbin/opensnoop
@@ -120,7 +122,7 @@ PID    COMM               FD ERR PATH
 
 ```
 
-### 6. Какой системный вызов использует `uname -a`? Приведите цитату из man по этому системному вызову, где описывается альтернативное местоположение в `/proc`, где можно узнать версию ядра и релиз ОС.
+#### 6. Какой системный вызов использует `uname -a`? Приведите цитату из man по этому системному вызову, где описывается альтернативное местоположение в `/proc`, где можно узнать версию ядра и релиз ОС.
 
 - Системный вызов `uname`
 
@@ -174,3 +176,117 @@ vagrant@vagrant:~$ man 2 uname
 Part of the utsname information is also accessible via /proc/sys/kernel/{ostype, hostname, osrelease, version, domainname}.
 ...
 ```
+
+#### 7. Чем отличается последовательность команд через `;` и `&&` в bash?
+- `;`  
+
+Для выполнения команд которые будут выполнены последовательно, одна за другой.
+
+Для этого используется специальный оператор `;`
+Если написать в командной строке:
+```
+vagrant@vagrant:~/test3$ mkdir /tmp/new-folder ; cd /tmp/new-folder
+```
+то оболочка вначале запустит на выполнение команду `mkdir /tmp/new-folder`, выполнится создание каталога, после чего выполнится перемещение в директорию `cd /tmp/new-folder`.   
+- `&&`  
+
+Оператор `&&` является управляющим оператором. Если в командной строке стоит `command1 && command2`, то `command2` выполняется в том случае, если статус выхода из команды `command1` имеет нулевой статус, что говорит об успешном ее завершении.   
+
+
+#### 7. Есть ли смысл использовать в bash `&&`, если применить `set -e`
+
+
+`set -e` - Немедленно выйти, если команда завершается с ненулевым статусом. 
+
+
+```
+-e    When this option is on, when any command fails (for any of the reasons listed in Section 2.8.1, Consequences of
+             Shell Errors or by returning an exit status greater than zero), the shell immediately shall exit, as if by exe‐
+             cuting the exit special built-in utility with no arguments, with the following exceptions:
+
+              1. The  failure  of any individual command in a multi-command pipeline shall not cause the shell to exit. Only
+                 the failure of the pipeline itself shall be considered.
+
+              2. The -e setting shall be ignored when executing the compound list following the while, until,  if,  or  elif
+                 reserved  word, a pipeline beginning with the !  reserved word, or any command of an AND-OR list other than
+                 the last.
+
+              3. If the exit status of a compound command other than a subshell command was the result of a failure while -e
+                 was being ignored, then -e shall not apply to this command.
+
+             This requirement applies to the shell environment and each subshell environment separately. For example, in:
+
+                 set -e; (false; echo one) | cat; echo two
+
+```
+
+#### 8. Изкаких опций состоит режим bash `set -euxo pipefail` и почему его хорошо было бы использовать в сценариях?   
+
+
+    -e  Немедленный выход, если команда завершается с ненулевым статусом.  
+    -u  При подстановке расценивайте неустановленные переменные как ошибку.     
+    -x  Печатать команды и их аргументы по мере их выполнения. 
+    -o  имя-опции
+           Установите переменную, соответствующую имени-опции: 
+            pipefail    возвращаемое значение конвейера - это статус последней команды для выхода с ненулевым статусом или ноль, если ни одна команда не вышла с ненулевым статусом.
+
+
+
+    -e  Exit immediately if a command exits with a non-zero status.  
+    -u  Treat unset variables as an error when substituting.  
+    -x  Print commands and their arguments as they are executed.  
+    -o  option-name
+          Set the variable corresponding to option-name:
+          pipefail      the return value of a pipeline is the status of
+                           the last command to exit with a non-zero status,
+                           or zero if no command exited with a non-zero status
+
+Сценарий с такими ключами выйдет если статуc завершения будет удачным, необходимо вводить определённые переменный при выполнении сценария, в противном случаее выдаст ошибку об не установленных переменных, будет выводить выполнение команд по мере их выполнения, выдаст pipefail если статус выполнения будет не удачным.
+
+#### 9. 
+
+
+```
+ ps  -o stat
+STAT
+Ss
+S
+S
+S
+Sl
+R+
+
+```
+S - Самый встречающийся 5 процессов.  
+s - лидер сеанса   
+l - является многопоточным
+
+( S  прерывистый сон (ожидание завершения события) )
+
+
+```
+PROCESS STATE CODES
+       Here are the different values that the s, stat and state output specifiers (header "STAT" or "S") will display to
+       describe the state of a process:
+
+               D    uninterruptible sleep (usually IO)
+               I    Idle kernel thread
+               R    running or runnable (on run queue)
+               S    interruptible sleep (waiting for an event to complete)
+               T    stopped by job control signal
+               t    stopped by debugger during the tracing
+               W    paging (not valid since the 2.6.xx kernel)
+               X    dead (should never be seen)
+               Z    defunct ("zombie") process, terminated but not reaped by its parent
+
+       For BSD formats and when the stat keyword is used, additional characters may be displayed:
+
+               <    high-priority (not nice to other users)
+               N    low-priority (nice to other users)
+               L    has pages locked into memory (for real-time and custom IO)
+               s    is a session leader
+               l    is multi-threaded (using CLONE_THREAD, like NPTL pthreads do)
+               +    is in the foreground process group
+
+```
+***
