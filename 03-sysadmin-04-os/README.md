@@ -1,4 +1,4 @@
-1. 
+#### 1. node_exporter  
 - 
 
 `sudo vi /lib/systemd/system/node_exporter.service`
@@ -33,4 +33,141 @@ KillMode=process
 [Install]
 WantedBy=multi-user.target
 ```
--  
+-
+
+#### 2.  Ознакомьтесь с опциями node_exporter и выводом /metrics по-умолчанию. Приведите несколько опций, которые вы бы выбрали для базового мониторинга хоста по CPU, памяти, диску и сети.   
+
+- 
+![node_exporter metrics](img/metrics.png)
+
+- 
+
+`curl http://localhost:9100/metrics`
+
+`curl http://localhost:9100/metrics | grep cpu`  
+...  
+...
+
+```
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 0.55
+
+# TYPE node_cpu_seconds_total counter
+node_cpu_seconds_total{cpu="0",mode="idle"} 812.1
+node_cpu_seconds_total{cpu="0",mode="iowait"} 1.55
+node_cpu_seconds_total{cpu="0",mode="irq"} 0
+node_cpu_seconds_total{cpu="0",mode="nice"} 0.02
+node_cpu_seconds_total{cpu="0",mode="softirq"} 0.1
+node_cpu_seconds_total{cpu="0",mode="steal"} 0
+node_cpu_seconds_total{cpu="0",mode="system"} 7.77
+node_cpu_seconds_total{cpu="0",mode="user"} 17.71
+node_cpu_seconds_total{cpu="1",mode="idle"} 809.04
+node_cpu_seconds_total{cpu="1",mode="iowait"} 2.05
+node_cpu_seconds_total{cpu="1",mode="irq"} 0
+node_cpu_seconds_total{cpu="1",mode="nice"} 0.02
+node_cpu_seconds_total{cpu="1",mode="softirq"} 0.52
+node_cpu_seconds_total{cpu="1",mode="steal"} 0
+node_cpu_seconds_total{cpu="1",mode="system"} 6.94
+node_cpu_seconds_total{cpu="1",mode="user"} 18.66
+
+
+
+# TYPE node_memory_MemAvailable_bytes gauge
+node_memory_MemAvailable_bytes 1.678647296e+09
+100 59846    0 59846    0     0  9740k      0 --:--:-- --:--:-- --:--:-- 9740k
+
+# TYPE node_memory_MemFree_bytes gauge
+node_memory_MemFree_bytes 1.465667584e+09
+100 59854    0 59854    0     0  19.0M      0 --:--:-- --:--:-- --:--:-- 19.0M
+
+
+
+
+# TYPE node_network_up gauge
+node_network_up{device="eth0"} 1
+
+# TYPE node_network_receive_errs_total counter
+node_network_receive_errs_total{device="eth0"} 0
+
+# TYPE node_network_transmit_errs_total counter
+node_network_transmit_errs_total{device="eth0"} 0
+
+# TYPE node_network_receive_bytes_total counter
+node_network_receive_bytes_total{device="eth0"} 46662
+
+# TYPE node_network_transmit_bytes_total counter
+node_network_transmit_bytes_total{device="eth0"} 60067
+
+
+
+# TYPE node_disk_io_time_seconds_total counter
+node_disk_io_time_seconds_total{device="dm-0"} 4.696
+node_disk_io_time_seconds_total{device="dm-1"} 0.06
+node_disk_io_time_seconds_total{device="sda"} 4.756
+
+# TYPE node_disk_read_bytes_total counter
+node_disk_read_bytes_total{device="dm-0"} 3.70123776e+08
+node_disk_read_bytes_total{device="dm-1"} 3.342336e+06
+node_disk_read_bytes_total{device="sda"} 3.8388224e+08
+
+# TYPE node_disk_read_time_seconds_total counter
+node_disk_read_time_seconds_total{device="dm-0"} 16.264
+node_disk_read_time_seconds_total{device="dm-1"} 0.052000000000000005
+node_disk_read_time_seconds_total{device="sda"} 8.546
+
+# TYPE node_disk_write_time_seconds_total counter
+node_disk_write_time_seconds_total{device="dm-0"} 0.8280000000000001
+node_disk_write_time_seconds_total{device="dm-1"} 0
+node_disk_write_time_seconds_total{device="sda"} 0.665
+
+```
+
+#### 3. Netdata
+
+![netdata](img/netdata.png)
+
+#### 4. Можно ли по выводу dmesg понять, осознает ли ОС, что загружена не на настоящем оборудовании, а на системе виртуализации?   
+
+Можно, например выводится сообщение `Hypervisor detected`  
+
+
+```
+vagrant@vagrant:~$ dmesg | grep KVM
+[    0.000000] Hypervisor detected: KVM
+[    0.035175] Booting paravirtualized kernel on KVM
+
+```
+
+#### 5. Как настроен sysctl fs.nr_open на системе по-умолчанию? Узнайте, что означает этот параметр. Какой другой существующий лимит не позволит достичь такого числа (ulimit --help)?  
+
+```
+vagrant@vagrant:~$ sysctl fs.nr_open
+fs.nr_open = 1048576
+```
+
+https://www.kernel.org/doc/Documentation/sysctl/fs.txt
+
+
+```
+nr_open:
+
+This denotes the maximum number of file-handles a process can
+allocate. Default value is 1024*1024 (1048576) which should be
+enough for most machines. Actual limit depends on RLIMIT_NOFILE
+resource limit.
+```
+
+```
+Это означает максимальное количество файловых дескрипторов, которые может выполнять процесс.
+выделить. Значение по умолчанию - 1024 * 1024 (1048576), что должно хватит на большинство машин. 
+Фактический лимит зависит от RLIMIT_NOFILE ограничение ресурса.
+```
+
+`ulimit --help`   
+
+```
+Значения указаны с шагом 1024 байта, за исключением -t, который задается в секундах,
+     -p с шагом 512 байт и -u немасштабируемый
+     количество процессов.
+```
+
