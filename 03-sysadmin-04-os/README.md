@@ -171,3 +171,44 @@ resource limit.
      количество процессов.
 ```
 
+#### 6. Запустите любой долгоживущий процесс (не `ls`, который отработает мгновенно, а, например, `sleep 1h`) в отдельном неймспейсе процессов; покажите, что ваш процесс работает под PID 1 через `nsenter`.   
+
+```
+root@vagrant:~# sleep 1h
+```
+
+```
+root@vagrant:~# ps -e | grep sleep
+   1775 pts/0    00:00:00 sleep
+
+```
+
+#### 7. 
+
+
+
+
+```
+-bash: fork: retry: Resource temporarily unavailable
+-bash: fork: retry: Resource temporarily unavailable
+-bash: fork: Resource temporarily unavailable
+-bash: fork: Resource temporarily unavailable
+-bash: fork: retry: Resource temporarily unavailable
+-bash: fork: Resource temporarily unavailable
+-bash: fork: Resource temporarily unavailable
+
+```
+
+https://en.wikipedia.org/wiki/Fork_bomb
+
+```
+:() означает, что вы определяете функцию под названием :
+
+{:|: &}означает запустить функцию :и :снова отправить ее вывод в функцию и запустить ее в фоновом режиме.
+
+Это ;разделитель команд.
+
+: запускает функцию в первый раз.
+
+По сути, вы создаете функцию, которая вызывает себя дважды при каждом вызове и не имеет возможности завершить себя. Он будет удваиваться, пока у вас не закончатся системные ресурсы.
+```
