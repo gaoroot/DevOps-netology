@@ -172,11 +172,50 @@ resource limit.
 ```
 
 #### 6. Запустите любой долгоживущий процесс (не `ls`, который отработает мгновенно, а, например, `sleep 1h`) в отдельном неймспейсе процессов; покажите, что ваш процесс работает под PID 1 через `nsenter`.   
+ 
+ - unshare
+
+Терминал 1
 
 ```
-
+root@ubuntu-bionic:~# unshare -f --pid --mount-proc sleep 1h
 ```
 
+Терминал 2
+
+```
+root@ubuntu-bionic:~# ps aux | grep sleep
+root      8205  0.0  0.0   7920   832 pts/2    S+   05:42   0:00 unshare -f --pid --mount-proc sleep 1h
+root      8206  0.0  0.0   7932   744 pts/2    S+   05:42   0:00 sleep 1h
+root      8802  0.0  0.1  14864  1096 pts/0    S+   05:46   0:00 grep --color=auto sleep
+root@ubuntu-bionic:~# nsenter -t 8206 -p -r ps -ef
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 05:42 pts/2    00:00:00 sleep 1h
+root         4     0  0 05:46 pts/0    00:00:00 ps -ef
+```
+
+![nsenter](img/nsenter-unshare.png)
+
+---
+
+ - Docker  
+
+Терминал 1  
+```
+docker run -it --name namespace-test ubuntu sleep 1h
+```
+Терминал 2   
+```
+docker inspect --format {{.State.Pid}} namespace-test
+PID 8107
+nsenter -t 8107 -p -r ps -ef
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 05:23 pts/0    00:00:00 sleep 1h
+root         7     0  0 05:29 ?        00:00:00 ps -ef
+```
+![nsenter](img/nsenter-docker.png)
+
+---
 ```
 root@vagrant:~# sleep 1h
 ```
@@ -186,7 +225,7 @@ root@vagrant:~# ps -e | grep sleep
    1775 pts/0    00:00:00 sleep
 
 ```
-
+---
 #### 7. `:(){ :|:& };:`  
 
 
