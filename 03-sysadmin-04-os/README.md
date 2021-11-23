@@ -26,7 +26,7 @@ After=multi-user.target
 
 [Service]
 EnvironmentFile=-/etc/default/node_exporter
-ExecStart=/bin/node_exporter
+ExecStart=/bin/node_exporter $EXTRA_OPTS
 IgnoreSIGPIPE=false
 KillMode=process
 
