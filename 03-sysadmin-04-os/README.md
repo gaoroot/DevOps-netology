@@ -71,7 +71,6 @@ node_cpu_seconds_total{cpu="1",mode="system"} 6.94
 node_cpu_seconds_total{cpu="1",mode="user"} 18.66
 
 
-
 # TYPE node_memory_MemAvailable_bytes gauge
 node_memory_MemAvailable_bytes 1.678647296e+09
 100 59846    0 59846    0     0  9740k      0 --:--:-- --:--:-- --:--:-- 9740k
@@ -79,8 +78,6 @@ node_memory_MemAvailable_bytes 1.678647296e+09
 # TYPE node_memory_MemFree_bytes gauge
 node_memory_MemFree_bytes 1.465667584e+09
 100 59854    0 59854    0     0  19.0M      0 --:--:-- --:--:-- --:--:-- 19.0M
-
-
 
 
 # TYPE node_network_up gauge
@@ -97,7 +94,6 @@ node_network_receive_bytes_total{device="eth0"} 46662
 
 # TYPE node_network_transmit_bytes_total counter
 node_network_transmit_bytes_total{device="eth0"} 60067
-
 
 
 # TYPE node_disk_io_time_seconds_total counter
@@ -122,7 +118,7 @@ node_disk_write_time_seconds_total{device="sda"} 0.665
 
 ```
 
-#### 3. Netdata
+#### 3. Netdata  
 
 ![netdata](img/netdata.png)
 
@@ -173,7 +169,7 @@ resource limit.
 
 #### 6. Запустите любой долгоживущий процесс (не `ls`, который отработает мгновенно, а, например, `sleep 1h`) в отдельном неймспейсе процессов; покажите, что ваш процесс работает под PID 1 через `nsenter`.   
  
- - unshare
+ - unshare  
 
 Терминал 1
 
@@ -259,3 +255,4 @@ https://en.wikipedia.org/wiki/Fork_bomb
 /etc/security/limits.conf
 
 Изначальнго там лимиты не указаны.
+
