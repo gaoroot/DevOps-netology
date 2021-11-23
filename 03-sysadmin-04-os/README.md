@@ -3,7 +3,7 @@
 
 `sudo vi /lib/systemd/system/node_exporter.service`
 
-Выставляем права:
+Выставляем права (Все пользователи имеют право чтения; владелец может редактировать):
 
 `sudo chmod 644 /lib/systemd/system/node_exporter.service`  
 
