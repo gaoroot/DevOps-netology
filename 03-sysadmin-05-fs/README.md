@@ -253,6 +253,7 @@
     vagrant@vagrant:~$ sudo pvcreate /dev/md0 /dev/md0
     Device /dev/md0 excluded by a filter.
     Physical volume "/dev/md0" successfully created.
+    
     vagrant@vagrant:~$ sudo pvcreate /dev/md1 /dev/md1
     Device /dev/md1 excluded by a filter.
     Physical volume "/dev/md1" successfully created.
