@@ -1,0 +1,11 @@
+![lsblk1.png](lsblk1.png)
+![sdb.png](sdb.png)
+![sdc.png](sdc.png)
+![sdc1-2.png](sdc1-2.png)
+![md0.png](md0.png)
+![md1.png](md1.png)
+![logical-volume.png](logical-volume.png)
+![lsblk.png](lsblk.png)
+![dmesg-md0.png](dmesg-md0.png)
+![test1.png](test1.png)
+
