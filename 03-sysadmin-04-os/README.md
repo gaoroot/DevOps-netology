@@ -1,3 +1,5 @@
+# Домашнее задание к занятию "3.4. Операционные системы, лекция 2" 
+
 #### 1. node_exporter  
 - 
 
@@ -222,9 +224,33 @@ root@vagrant:~# ps -e | grep sleep
 
 ```
 ---
-#### 7. `:(){ :|:& };:`  
+#### 7. `:(){ :|:& };:`   
 
 
+
+   >При запуске проиходит:
+   >Эта функция которая создаёт две свои копии при каждом вызове и происходит это пока не закончатся системные ресурсы.
+
+   >Указаны
+   >Установленые Hard лдимиты  
+   >vagrant@vagrant:~$ ulimit -Hn  
+   >1048576
+
+   >Установленые Soft лдимиты    
+   >vagrant@vagrant:~$ ulimit -Sn  
+   >1024
+
+
+
+   >```bash
+   >vagrant@vagrant:~$ dmesg | grep fork
+   >[   33.928954] cgroup: fork rejected by pids controller in /user.slice/user-1000.slice/session-4.scope
+   >vagrant@vagrant:~$ dmesg | grep cgroup
+   >[    0.061481] *** VALIDATE cgroup1 ***
+   >[    0.061482] *** VALIDATE cgroup2 ***
+   >[   33.928954] cgroup: fork rejected by pids controller in /user.slice/user-1000.slice/session-4.scope
+   >```
+   >
 
 
 ```
@@ -255,4 +281,5 @@ https://en.wikipedia.org/wiki/Fork_bomb
 /etc/security/limits.conf
 
 Изначальнго там лимиты не указаны.
+> В файле все закоментировано.
 
