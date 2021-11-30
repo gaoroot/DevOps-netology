@@ -61,22 +61,22 @@
 	version: 2
 	renderer: networkd
 	ethernets:
-		eth0:
-		dhcp4: no
-		addresses: [192.168.100.120/24]
-		gateway4: 192.168.100.1
-		nameservers:
-		addresses: [8.8.8.8,8.8.4.4]
+	    eth0:
+        dhcp4: no
+        addresses: [192.168.100.120/24]
+	    gateway4: 192.168.100.1
+	    nameservers:
+	    addresses: [8.8.8.8,8.8.4.4]
 	vlans:
-		vlan30:
-		id: 30
-		link: eth0
-		dhcp4: no
-		addresses: [192.168.30.12/24]
-		routes:
-			- to: 192.168.30.12/24
-				via: 192.168.30.1
-				on-link: true
+	    vlan30:
+	    id: 30
+	    link: eth0
+	    dhcp4: no
+	    addresses: [192.168.30.12/24]
+	    routes:
+	          - to: 192.168.30.12/24
+	            via: 192.168.30.1
+	            on-link: true
 	```
 
 	- На redhat подобных надо создать файл `/etc/sysconfig/network-scripts/ifcfg-eth0.40`
@@ -158,7 +158,7 @@
  Инструкция по установке - https://github.com/svmyasnikov/eve-ng
 
  Выполните задания на lldp, vlan, bonding в эмуляторе EVE-ng.
- 
-  
+
+
  
  ---
