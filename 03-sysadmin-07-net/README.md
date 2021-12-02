@@ -109,36 +109,36 @@
 
 4. Какие типы агрегации интерфейсов есть в Linux? Какие опции есть для балансировки нагрузки? Приведите пример конфига.   
 
-	- `bonding` Агрегация сетевых интерфейсов
-		- Типы:
-		- `balance-rr` - поочерёдное испольщзование интерфейсов про отправке пакетов
-		- `active-backup` - Работает только один интерфейс, второй находится в резерве
-		- `balance-xor` - Интерфейс определяет, через интерфейс отправить пакеты, в зависимости от MAC-адресов источника и получателя.
-		- `broadcast` - Все пакеты отправляются через каждый интерфейс.
-		- `802.3ad` - Реализует стандарты объединения каналов IEEE и обеспечивает как увеличение пропускной способности, так и отказоустойчивость.
-		- `balance-tlb` - Распределение нагрузки при передаче. Входящий трафик обрабатывается в обычном режиме, а при передаче интерфейс определяется на основе данных о загруженности.
-		- `balance-alb` - Адаптивное распределение нагрузки. Аналогично предыдущему режиму, но с возможностью балансировать также входящую нагрузку.  
+- `bonding` Агрегация сетевых интерфейсов
+	- Типы:
+	- `balance-rr` - поочерёдное испольщзование интерфейсов про отправке пакетов
+	- `active-backup` - Работает только один интерфейс, второй находится в резерве
+	- `balance-xor` - Интерфейс определяет, через интерфейс отправить пакеты, в зависимости от MAC-адресов источника и получателя.
+	- `broadcast` - Все пакеты отправляются через каждый интерфейс.
+	- `802.3ad` - Реализует стандарты объединения каналов IEEE и обеспечивает как увеличение пропускной способности, так и отказоустойчивость.
+	- `balance-tlb` - Распределение нагрузки при передаче. Входящий трафик обрабатывается в обычном режиме, а при передаче интерфейс определяется на основе данных о загруженности.
+	- `balance-alb` - Адаптивное распределение нагрузки. Аналогично предыдущему режиму, но с возможностью балансировать также входящую нагрузку.  
 
-	- бондинг в ubuntu после 18 версии где используется `netplan`
+- бондинг в ubuntu после 18 версии где используется `netplan`
 
-	```yaml
-		network: 
-		renderer: networkd 
-		version: 2 
-		ethernets: 
-			eth0:
-			dhcp4: no
-			eth1:
-			dhcp4: no
-		bonds: 
-		bond0:
-			dhcp4: true
-			interfaces: [eth0, eth1]
-			parameters:
-			mode: 802.3ad
-			mii-monitor-interval: 1
+```yaml
+network: 
+renderer: networkd 
+version: 2 
+ethernets: 
+    eth0:
+    dhcp4: no
+    eth1:
+    dhcp4: no
+bonds: 
+bond0:
+    dhcp4: true
+    interfaces: [eth0, eth1]
+    parameters:
+    mode: 802.3ad
+    mii-monitor-interval: 1
 
-	```
+```
 
 	![Бондинг 802.3ad](img/bond0.png)
 
@@ -149,7 +149,6 @@
 		- `sudo nano /etc/network/interfaces`
 
 ```bash
-# The primary network interface
 auto bond0
 iface bond0 inet static
     address 192.168.100.150
@@ -164,35 +163,35 @@ iface bond0 inet static
         bound_updelay 200
 ```
 
-		- На redhat подобных
-			- В дирректории `/etc/sysconfig/network-scripts/` создать конфигурационный файл `ifcfg-bond0`
-			```bash
-			DEVICE=bond0
-			IPADDR=192.168.100.100
-			NETMASK=255.255.255.0
-			ONBOOT=yes
-			BOOTPROTO=none
-			USERCTL=no
-			```
-			- В конфигурационных файлах сетевых интерфесов `ifcfg-eth0` и `ifcfg-eth1`
-			- `ifcfg-eth0`
-			```bash
-			DEVICE=eth0
-			USERCTL=no
-			ONBOOT=yes
-			MASTER=bond0
-			SLAVE=yes
-			BOOTPROTO=none
-			```
-			- `ifcfg-eth1`
-			```bash
-			DEVICE=eth1
-			USERCTL=no
-			ONBOOT=yes
-			MASTER=bond0
-			SLAVE=yes
-			BOOTPROTO=none
-			```
+- На redhat подобных
+	- В дирректории `/etc/sysconfig/network-scripts/` создать конфигурационный файл `ifcfg-bond0`
+	```bash
+	DEVICE=bond0
+	IPADDR=192.168.100.100
+	NETMASK=255.255.255.0
+	ONBOOT=yes
+	BOOTPROTO=none
+	USERCTL=no
+	```
+	- В конфигурационных файлах сетевых интерфесов `ifcfg-eth0` и `ifcfg-eth1`
+	- `ifcfg-eth0`
+	```bash
+	DEVICE=eth0
+	USERCTL=no
+	ONBOOT=yes
+	MASTER=bond0
+	SLAVE=yes
+	BOOTPROTO=none
+	```
+	- `ifcfg-eth1`
+	```bash
+	DEVICE=eth1
+	USERCTL=no
+	ONBOOT=yes
+	MASTER=bond0
+	SLAVE=yes
+	BOOTPROTO=none
+	```
 
 
 5. Сколько IP адресов в сети с маской /29 ? Сколько /29 подсетей можно получить из сети с маской /24. Приведите несколько примеров /29 подсетей внутри сети 10.10.10.0/24.   
