@@ -256,6 +256,9 @@
 
  Выполните задания на lldp, vlan, bonding в эмуляторе EVE-ng.
 
-
- 
+![Схема](img/eve.png)
+![lldpctl linux1](img/lldpctl-linux1.png)
+![lldpctl linux2](img/lldpctl-linux2.png)
+![Настройка сети на linux1](img/lan-linux1.png)
+![Настройка сети на linux2](img/lan-linux2.png)
  ---
