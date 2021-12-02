@@ -132,7 +132,7 @@
 			dhcp4: no
 		bonds: 
 		bond0:
-			dhcp4: yes
+			dhcp4: true
 			interfaces: [eth0, eth1]
 			parameters:
 			mode: 802.3ad
