@@ -148,21 +148,21 @@
 
 		- `sudo nano /etc/network/interfaces`
 
-		```bash
-		# The primary network interface
-		auto bond0
-		iface bond0 inet static
-			address 192.168.100.150
-			netmask 255.255.255.0    
-			gateway 192.168.100.1
-			dns-nameservers 8.8.8.8
-			dns-search domain.local
-				slaves eth0 eth1
-				bond_mode 0
-				bond-miimon 100
-				bond_downdelay 200
-				bound_updelay 200
-		```
+```bash
+# The primary network interface
+auto bond0
+iface bond0 inet static
+    address 192.168.100.150
+    netmask 255.255.255.0    
+    gateway 192.168.100.1
+    dns-nameservers 8.8.8.8
+    dns-search domain.local
+        slaves eth0 eth1
+        bond_mode 0
+        bond-miimon 100
+        bond_downdelay 200
+        bound_updelay 200
+```
 
 		- На redhat подобных
 			- В дирректории `/etc/sysconfig/network-scripts/` создать конфигурационный файл `ifcfg-bond0`
