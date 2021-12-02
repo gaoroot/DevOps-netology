@@ -140,13 +140,13 @@ bond0:
 
 ```
 
-	![Бондинг 802.3ad](img/bond0.png)
+![Бондинг 802.3ad](img/bond0.png)
 
-	![Настройка бондинга](img/bond0-address.png)
+![Настройка бондинга](img/bond0-address.png)
 
-	- бондинг в ubuntu до 18 версии
+- бондинг в ubuntu до 18 версии
 
-		- `sudo nano /etc/network/interfaces`
+	- `sudo nano /etc/network/interfaces`
 
 ```bash
 auto bond0
@@ -164,6 +164,7 @@ iface bond0 inet static
 ```
 
 - На redhat подобных
+
 	- В дирректории `/etc/sysconfig/network-scripts/` создать конфигурационный файл `ifcfg-bond0`
 	```bash
 	DEVICE=bond0
