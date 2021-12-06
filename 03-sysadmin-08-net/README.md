@@ -143,19 +143,19 @@ default via 10.0.2.2 dev eth0 proto dhcp src 10.0.2.15 metric 100
 - Статические маршруты в `netplan` в секции `routes`
 
 ```yaml
-	network:
-	version: 2
-	renderer: networkd
-	ethernets:
-	    eth0:
-        dhcp4: no
-        addresses: [192.168.100.120/24]
-	    gateway4: 192.168.100.1
-	    nameservers:
-	    addresses: [8.8.8.8,8.8.4.4]
-        routes:
-          - to: 10.0.0.0/24
-            via: 192.168.1.1
+network:
+version: 2
+renderer: networkd
+ethernets:
+    eth0:
+       dhcp4: no
+       addresses: [192.168.100.120/24]
+    gateway4: 192.168.100.1
+    nameservers:
+    addresses: [8.8.8.8,8.8.4.4]
+       routes:
+         - to: 10.0.0.0/24
+           via: 192.168.1.1
 ```
 - Ещё примеры статических маршрутов в `yaml` формате в `netplan`
 
