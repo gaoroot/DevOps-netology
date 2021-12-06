@@ -321,4 +321,6 @@ root    /var/www/test.local;}
 
 8*. Установите Netbox, создайте несколько IP префиксов, используя curl проверьте работу API.
 
+![](img/netbox.png)
+
  ---
