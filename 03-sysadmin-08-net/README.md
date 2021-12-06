@@ -140,25 +140,182 @@ default via 10.0.2.2 dev eth0 proto dhcp src 10.0.2.15 metric 100
 192.168.24.0/24 dev eth0 scope link 
 ```
 
+- Статические маршруты в `netplan` в секции `routes`
 
+```yaml
+	network:
+	version: 2
+	renderer: networkd
+	ethernets:
+	    eth0:
+        dhcp4: no
+        addresses: [192.168.100.120/24]
+	    gateway4: 192.168.100.1
+	    nameservers:
+	    addresses: [8.8.8.8,8.8.4.4]
+        routes:
+          - to: 10.0.0.0/24
+            via: 192.168.1.1
+```
+- Ещё примеры статических маршрутов в `yaml` формате в `netplan`
 
+```yaml
+routes:
+  - to: 10.0.0.0/24
+    via: 10.24.0.1
+  - to: 172.16.0.0/16
+    via: 10.24.1.1
+  - to: 192.168.12.0/24
+    via: 192.168.10.254
+```
 
 3. Проверьте открытые TCP порты в Ubuntu, какие протоколы и приложения используют эти порты? Приведите несколько примеров.
 
+- Пример вывода комманды `ss` с ключём `t` - tcp-соединения
+
+```bash
+user0@ubuntu0:~$ ss -t
+State            Recv-Q            Send-Q                         Local Address:Port                         Peer Address:Port            Process           
+ESTAB            0                 0                            192.168.100.120:ssh                        192.168.100.10:57882                             
+```
+
+- Пример вывода комманды `ss` с ключём `u` - udp-соединения (на момент проверки у меня таковых нет)
+
+```bash
+user0@ubuntu0:~$ ss -u
+Recv-Q               Send-Q                             Local Address:Port                             Peer Address:Port              Process                                           
+```
+- Пример вывода комманды `ss` с ключём `t` и `a` - Cоединения ожидающие подключений(t - tcp)
+
+```bash
+user0@ubuntu0:~$ ss -t -a
+State            Recv-Q           Send-Q                        Local Address:Port                           Peer Address:Port            Process           
+LISTEN           0                4096                          127.0.0.53%lo:domain                              0.0.0.0:*                                 
+LISTEN           0                128                                 0.0.0.0:ssh                                 0.0.0.0:*                                 
+ESTAB            0                0                           192.168.100.120:ssh                          192.168.100.10:57882                             
+LISTEN           0                128                                    [::]:ssh                                    [::]:*                                
+```
+
+- Проверил подключён ли конкретный ip к серверу.
+
+```bash
+user0@ubuntu0:~$ ss dst 192.168.100.10
+Netid          State          Recv-Q          Send-Q                     Local Address:Port                     Peer Address:Port          Process          
+tcp            ESTAB          0               0                        192.168.100.120:ssh                    192.168.100.10:57882                          
+
+```
+- `ss -tl` - Прослушиваемые tcp-соединения, `l` - показывает прослушиваемые сокеты, `t` — означает порт tcp
+
+```bash
+user0@ubuntu0:~$ ss -tl
+State           Recv-Q          Send-Q                   Local Address:Port                     Peer Address:Port          Process          
+LISTEN          0               4096                     127.0.0.53%lo:domain                        0.0.0.0:*                              
+LISTEN          0               128                            0.0.0.0:ssh                           0.0.0.0:*                              
+LISTEN          0               128                               [::]:ssh                              [::]:*                              
+user0@ubuntu0:~$ 
+```
+
+ - `ss -lu` - Прослушиваемые udp-соединения, `u` - означает порт UDP.
+
+```bash
+user0@ubuntu0:~$ ss -lu
+State       Recv-Q       Send-Q                                 Local Address:Port                      Peer Address:Port      Process      
+UNCONN      0            0                                      127.0.0.53%lo:domain                         0.0.0.0:*                      
+UNCONN      0            0                                          127.0.0.1:snmp                           0.0.0.0:*                      
+UNCONN      0            0                                              [::1]:snmp                              [::]:*                      
+UNCONN      0            0                  [fe80::a00:27ff:fe33:1103]%enp0s3:dhcpv6-client                     [::]:*                      
+```
+
+- `ss -lntup` tcp и udp соединения одновременно, `p` - выдает список имен процессов, которые открыли сокеты.
+
+```bash
+user0@ubuntu0:~$ ss -lntup
+Netid      State       Recv-Q      Send-Q                                Local Address:Port             Peer Address:Port      Process      
+udp        UNCONN      0           0                                     127.0.0.53%lo:53                    0.0.0.0:*                      
+udp        UNCONN      0           0                                         127.0.0.1:161                   0.0.0.0:*                      
+udp        UNCONN      0           0                                             [::1]:161                      [::]:*                      
+udp        UNCONN      0           0                 [fe80::a00:27ff:fe33:1103]%enp0s3:546                      [::]:*                      
+tcp        LISTEN      0           4096                                  127.0.0.53%lo:53                    0.0.0.0:*                      
+tcp        LISTEN      0           128                                         0.0.0.0:22                    0.0.0.0:*                      
+tcp        LISTEN      0           128                                            [::]:22                       [::]:*                      
+```
 
 
 4. Проверьте используемые UDP сокеты в Ubuntu, какие протоколы и приложения используют эти порты?
 
 
+ - Воспользуюсь командой `ss -lnup`
+
+```bash                    
+user0@ubuntu0:~$ ss -lnup
+State         Recv-Q        Send-Q                                   Local Address:Port               Peer Address:Port       Process       
+UNCONN        0             0                                        127.0.0.53%lo:53                      0.0.0.0:*                        
+UNCONN        0             0                                            127.0.0.1:161                     0.0.0.0:*                        
+UNCONN        0             0                                                [::1]:161                        [::]:*                        
+UNCONN        0             0                    [fe80::a00:27ff:fe33:1103]%enp0s3:546                        [::]:*                                      
+```
+
+- 53 udp порт `dns`   
+- 161 порт `snmp`  
+(в выводе присутствует ipv4 и ipv6)
+- 546 dhcp ipv6  
+(DHCPv6 использует UDP номер порта 546 для клиентов и номер порта 547 для серверов.)  
 
 5. Используя diagrams.net, создайте L3 диаграмму вашей домашней сети или любой другой сети, с которой вы работали. 
 
-
+![Пример сети](img/netology.drawio.png)
 
  ---
 ## Задание для самостоятельной отработки (необязательно к выполнению)
 
 6*. Установите Nginx, настройте в режиме балансировщика TCP или UDP.
+
+`sudo nano /etc/hosts`  
+
+192.168.100.120 test.local  
+
+`sudo nano /etc/nginx/sites-available/test.local`  
+
+```sh
+upstream backend {
+    server 192.168.100.121:80;
+    server 192.168.100.122:80;
+    server 192.168.100.123:80;
+}
+
+server {
+    listen    80;
+    server_name  test.local;
+    location ~* \.()$ {
+    root   /var/www/test.local;  }
+    location / {
+    client_max_body_size    10m;
+    client_body_buffer_size 128k;
+    proxy_send_timeout   90;
+    proxy_read_timeout   90;
+    proxy_buffer_size    4k;
+    proxy_buffers     16 32k;
+    proxy_busy_buffers_size 64k;
+    proxy_temp_file_write_size 64k;
+    proxy_connect_timeout 30s;
+    proxy_pass   http://backend;
+    proxy_set_header   Host   $host;
+    proxy_set_header   X-Real-IP  $remote_addr;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+       }
+location ~* /.(jpg|jpeg|gif|png|css|mp3|avi|mpg|txt|js|jar|rar|zip|tar|wav|wmv)$ {
+root    /var/www/test.local;}
+ }
+```
+
+![](img/vbox.png)
+
+![](img/nginx1.png)
+
+![](img/nginx2.png)
+
+![](img/nginx3.png)
+
 
 7*. Установите bird2, настройте динамический протокол маршрутизации RIP.
 
