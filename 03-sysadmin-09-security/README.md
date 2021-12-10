@@ -190,5 +190,53 @@ tcpdump: listening on enp0s3, link-type EN10MB (Ethernet), capture size 262144 b
 
 9*. Установите и настройте фаервол ufw на web-сервер из задания 3. Откройте доступ снаружи только к портам 22,80,443
 
+```bash
+user0@ubuntu0:~$ sudo ufw status verbose
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+80/tcp (Nginx HTTP)        ALLOW IN    Anywhere                  
+22/tcp                     ALLOW IN    Anywhere                  
+80/tcp (Nginx HTTP (v6))   ALLOW IN    Anywhere (v6)             
+22/tcp (v6)                ALLOW IN    Anywhere (v6)             
+
+user0@ubuntu0:~$ sudo ufw app list
+Available applications:
+  CUPS
+  Nginx Full
+  Nginx HTTP
+  Nginx HTTPS
+  OpenSSH
+user0@ubuntu0:~$ sudo ufw allow https
+Rule added
+Rule added (v6)
+user0@ubuntu0:~$ sudo ufw app list
+Available applications:
+  CUPS
+  Nginx Full
+  Nginx HTTP
+  Nginx HTTPS
+  OpenSSH
+user0@ubuntu0:~$ sudo ufw status verbose
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+80/tcp (Nginx HTTP)        ALLOW IN    Anywhere                  
+22/tcp                     ALLOW IN    Anywhere                  
+443/tcp                    ALLOW IN    Anywhere                  
+80/tcp (Nginx HTTP (v6))   ALLOW IN    Anywhere (v6)             
+22/tcp (v6)                ALLOW IN    Anywhere (v6)             
+443/tcp (v6)               ALLOW IN    Anywhere (v6)             
+
+
+```
 
  ---
