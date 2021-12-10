@@ -135,7 +135,7 @@ Nmap done: 1 IP address (1 host up) scanned in 27.20 seconds
 
 в предыдущем задании [03-sysadmin-08-net 6*](https://github.com/gaoroot/DevOps-netology/tree/main/03-sysadmin-08-net#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B9-%D0%BE%D1%82%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BD%D0%B5%D0%BE%D0%B1%D1%8F%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE-%D0%BA-%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D1%8E) настраивал `nginx` как балансировщик нагрузки и делал доступ с `192.168.100.120` до хостов `121, 122, 123` по `ssh` без пароля    
 
-Выполнял команды:  
+Выполнял команды на 192.168.100.120:  
 
 `ssh-keygen`  
 `ssh-copy-id user0@192.168.100.121`   
