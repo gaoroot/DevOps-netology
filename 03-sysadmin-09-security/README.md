@@ -23,7 +23,7 @@
 
 4. Проверьте на TLS уязвимости произвольный сайт в интернете (кроме сайтов МВД, ФСБ, МинОбр, НацБанк, РосКосмос, РосАтом, РосНАНО и любых госкомпаний, объектов КИИ, ВПК ... и тому подобное).
 
-Запускал `testssl.sh` скачаный из репозитория `https://github.com/drwetter/testssl.sh.git`:  
+Запускал `testssl.sh` скачанный из репозитория `https://github.com/drwetter/testssl.sh.git`:  
 
 `./testssl.sh -e --fast --parallel https://www.google.com/`  
 `./testssl.sh -e --fast --parallel https://ya.ru/`  
@@ -136,7 +136,7 @@ Nmap done: 1 IP address (1 host up) scanned in 27.20 seconds
 192.168.100.122 - ubuntu2  
 192.168.100.123 - ubuntu3
 
-в предыдущем задании [03-sysadmin-08-net 6*](https://github.com/gaoroot/DevOps-netology/tree/main/03-sysadmin-08-net#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B9-%D0%BE%D1%82%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BD%D0%B5%D0%BE%D0%B1%D1%8F%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE-%D0%BA-%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D1%8E) настраивал `nginx` как балансировщик нагрузки и делал доступ с `192.168.100.120` до хостов `121, 122, 123` по `ssh` без пароля    
+В предыдущем задании [03-sysadmin-08-net 6*](https://github.com/gaoroot/DevOps-netology/tree/main/03-sysadmin-08-net#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B9-%D0%BE%D1%82%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BD%D0%B5%D0%BE%D0%B1%D1%8F%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE-%D0%BA-%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D1%8E) настраивал `nginx` как балансировщик нагрузки и делал доступ с `192.168.100.120` до хостов `121, 122, 123` по `ssh` без пароля    
 
 Выполнял команды на 192.168.100.120:  
 
@@ -189,6 +189,30 @@ tcpdump: listening on enp0s3, link-type EN10MB (Ethernet), capture size 262144 b
 
 8*. Просканируйте хост scanme.nmap.org. Какие сервисы запущены?
 
+`nmap scanme.nmap.org`
+
+```bash
+Starting Nmap 7.92 ( https://nmap.org ) at 2021-12-11 12:48 +08
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.25s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+Not shown: 996 closed tcp ports (conn-refused)
+PORT      STATE SERVICE
+22/tcp    open  ssh
+80/tcp    open  http
+9929/tcp  open  nping-echo
+31337/tcp open  Elite
+
+Nmap done: 1 IP address (1 host up) scanned in 9.87 seconds
+
+```
+
+Cервисы:
+
+  - ssh  
+  - http  
+  - nping-echo  
+  - Elite  
 
 
 9*. Установите и настройте фаервол ufw на web-сервер из задания 3. Откройте доступ снаружи только к портам 22,80,443
