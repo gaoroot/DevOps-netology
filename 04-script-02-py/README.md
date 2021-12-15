@@ -66,16 +66,16 @@ bash_command = ["cd /run/media/alexandr/Data/DevOps/DevOps-netology", "git statu
 result_os = os.popen(' && '.join(bash_command)).read()
 for result in result_os.split('\n'):
     if result.find('изменено') != -1:
-        prepare_result = result.replace('\tmodified:   ', '')
+        prepare_result = result.replace('\изменено:   ', '')
         print(prepare_result)
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-	изменено:      .idea/workspace.xml
-	изменено:      04-script-02-py/README.md
-	изменено:      test.txt
-
+        изменено:      .idea/workspace.xml
+        изменено:      04-script-02-py/README.md
+        изменено:      04-script-02-py/script/script1.py
+        изменено:      test.txt
 ```
 
 ## Обязательная задача 3
