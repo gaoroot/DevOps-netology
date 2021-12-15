@@ -2,19 +2,19 @@
 
 ## 1.1 Домашнее задание к занятию «1.1. Введение в DevOps»
 
--
+✔ [01-intro-01](01-intro-01/README.md)
 
 ## 2.1 Домашнее задание к занятию «2.1. Системы контроля версий.»
 
--
+✔ [02-git-01-vcs](02-git-01-vcs/README.md)
 
 ## 2.2 Домашнее задание к занятию «2.2. Основы Git»
 
--
+✔ [02-git-02-base](02-git-02-base/README.md)
 
 ## 2.3 Домашнее задание к занятию «2.3. Ветвления в Git»
 
--
+✔ [02-git-03-branching](02-git-03-branching/README.md)
 
 ## 2.4 Домашнее задание к занятию «2.4. Инструменты Git»
 
@@ -58,19 +58,19 @@
 
 ## 4.1 Домашнее задание к занятию "4.1. Командная оболочка Bash: Практические навыки"
 
- [04-script-01-bash](04-script-01-bash/README.md)
+* [04-script-01-bash](04-script-01-bash/README.md)
 
 ## 4.2 Домашнее задание к занятию "4.2. Использование Python для решения типовых DevOps задач"
 
- [04-script-02-py](04-script-02-py/README.md)
+* [04-script-02-py](04-script-02-py/README.md)
 
 ## 4.3 Домашнее задание к занятию "4.3. Языки разметки JSON и YAML"
 
- [04-script-03-yaml](04-script-03-yaml/README.md)
+* [04-script-03-yaml](04-script-03-yaml/README.md)
 
 # Курсовая работа по итогам модуля "DevOps и системное администрирование"
 
- [pcs-devsys-diplom](pcs-devsys-diplom/README.md)
+* [pcs-devsys-diplom](pcs-devsys-diplom/README.md)
 
 
 #### Ответы по `git`
