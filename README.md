@@ -58,19 +58,19 @@
 
 ## 4.1 Домашнее задание к занятию "4.1. Командная оболочка Bash: Практические навыки"
 
-❎ [04-script-01-bash](04-script-01-bash/README.md)
+ [04-script-01-bash](04-script-01-bash/README.md)
 
 ## 4.2 Домашнее задание к занятию "4.2. Использование Python для решения типовых DevOps задач"
 
-❎ [04-script-02-py](04-script-02-py/README.md)
+ [04-script-02-py](04-script-02-py/README.md)
 
 ## 4.3 Домашнее задание к занятию "4.3. Языки разметки JSON и YAML"
 
-❎ [04-script-03-yaml](04-script-03-yaml/README.md)
+ [04-script-03-yaml](04-script-03-yaml/README.md)
 
 # Курсовая работа по итогам модуля "DevOps и системное администрирование"
 
-❎ [pcs-devsys-diplom](pcs-devsys-diplom/README.md)
+ [pcs-devsys-diplom](pcs-devsys-diplom/README.md)
 
 
 #### Ответы по `git`
