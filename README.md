@@ -46,18 +46,31 @@
 
 ## 3.7 Домашнее задание к занятию "3.7. Компьютерные сети, лекция 2"
 
-✔ [03-sysadmin-06-net](03-sysadmin-07-net/README.md)
+✔ [03-sysadmin-07-net](03-sysadmin-07-net/README.md)
 
 ## 3.8 Домашнее задание к занятию "3.8. Компьютерные сети, лекция 3"
 
+✔ [03-sysadmin-08-net](03-sysadmin-08-net/README.md)
+
 ## 3.9 Домашнее задание к занятию "3.9. Элементы безопасности информационных систем"
+
+✔ [03-sysadmin-09-security](03-sysadmin-09-security/README.md)
 
 ## 4.1 Домашнее задание к занятию "4.1. Командная оболочка Bash: Практические навыки"
 
+❎ [04-script-01-bash](04-script-01-bash/README.md)
+
 ## 4.2 Домашнее задание к занятию "4.2. Использование Python для решения типовых DevOps задач"
+
+❎ [04-script-02-py](04-script-02-py/README.md)
 
 ## 4.3 Домашнее задание к занятию "4.3. Языки разметки JSON и YAML"
 
+❎ [04-script-03-yaml](04-script-03-yaml/README.md)
+
+# Курсовая работа по итогам модуля "DevOps и системное администрирование"
+
+❎ [pcs-devsys-diplom](pcs-devsys-diplom/README.md)
 
 
 #### Ответы по `git`
