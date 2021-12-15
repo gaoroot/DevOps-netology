@@ -72,12 +72,9 @@ for result in result_os.split('\n'):
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-/home/alexandr/PycharmProjects/TestFlask/venv/bin/python /run/media/alexandr/Data/DevOps/DevOps-netology/04-script-02-py/script/script1.py
 	изменено:      .idea/workspace.xml
 	изменено:      04-script-02-py/README.md
 	изменено:      test.txt
-
-Process finished with exit code 0
 
 ```
 
