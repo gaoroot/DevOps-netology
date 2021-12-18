@@ -59,14 +59,12 @@
 
 	```bash
 	#!/bin/bash
-	while ((1==1))
-	do
-	curl http://localhost
-	if (($? != 0))
-	then
-	date >> curl.log
-	sleep 1
-	fi
+	while ((1 == 1)); do
+		curl http://localhost
+		if (($? != 0)); then
+			date >>curl.log
+			sleep 1
+		fi
 	done
 	```
 	Не хватало скобки `while ((1==1))`  
@@ -76,15 +74,14 @@
 	Финальный вариант скрипта.  
 
 	```bash
-	while ((1==1))
-	do
-	curl http://localhost
-	if (($? != 0))
-	then
-	date >> curl.log
-	sleep 1
-	else exit
-	fi
+	while ((1 == 1)); do
+		curl http://localhost
+		if (($? != 0)); then
+			date >>curl.log
+			sleep 1
+		else
+			exit
+		fi
 	done
 	```  
 
@@ -110,23 +107,21 @@
 	timeout=5
 	log=ip_log.log
 	check='curl -Is --connect-timeout'
-	for i in {1..5}
-	do
-	date>>$log
-	for host in ${ips[@]}
-	do
-	$check $timeout http://$host>/dev/null
+	for i in {1..5}; do
+		date >>$log
+		for host in ${ips[@]}; do
+			$check $timeout http://$host >/dev/null
 
-	if (($? == 0))
-	then
-	status="http UP"
-	else
-	status="http DOWN"
-	fi
+			if (($? == 0)); then
+				status="http UP"
+			else
+				status="http DOWN"
+			fi
 
-	echo $host $status>>$log
+			echo $host $status >>$log
+		done
 	done
-	done
+
 	```
 	ip_log.log   
 	```
@@ -147,24 +142,21 @@
 	log=ip_log.log
 	errorlog=ip_error.log
 	check='curl -Is --connect-timeout'
-	for i in {1..5}
-	do
-	date>>$log
-	for host in ${ips[@]}
-	do
-	$check $timeout http://$host>/dev/null
+	for i in {1..5}; do
+		date >>$log
+		for host in ${ips[@]}; do
+			$check $timeout http://$host >/dev/null
 
-	if (($? == 0))
-	then
-	status="http UP"
-	echo $host $status>>$log
-	else
-	status="http DOWN"
-	echo $host $status>>$errorlog
-	exit
-	fi
+			if (($? == 0)); then
+				status="http UP"
+				echo $host $status >>$log
+			else
+				status="http DOWN"
+				echo $host $status >>$errorlog
+				exit
+			fi
 
-	done
+		done
 	done
 	```
 
