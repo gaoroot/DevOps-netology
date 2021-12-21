@@ -83,12 +83,35 @@ for result in result_os.split('\n'):
 
 ### Ваш скрипт:
 ```python
-???
+#!/usr/bin/env python3
+
+import os
+import sys
+
+
+cmd = os.getcwd()
+
+if len(sys.argv)>=2:
+    cmd = sys.argv[1]
+bash_command = ["cd "+cmd, "git status 2>&1"]
+result_os = os.popen(' && '.join(bash_command)).read()
+for result in result_os.split('\n'):
+    if result.find('fatal') != -1:
+        print(cmd+" git не найден")
+    if result.find('изменено') != -1:
+        prepare_result = result.replace('изменено:   ', '')
+        print (prepare_result.format() )
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+~ /bin/python /run/media/alexandr/Data/DevOps/DevOps-netology/04-script-02-py/script/script2.py
+/home/alexandr git не найден
+
+~ /bin/python /run/media/alexandr/Data/DevOps/DevOps-netology/04-script-02-py/script/script2.py /run/media/alexandr/Data/DevOps/DevOps-netology
+
+   04-script-02-py/README.md
+   04-script-02-py/script/script1.py
 ```
 
 ## Обязательная задача 4
