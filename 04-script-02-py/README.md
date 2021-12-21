@@ -99,19 +99,17 @@ for result in result_os.split('\n'):
     if result.find('fatal') != -1:
         print(cmd+" git не найден")
     if result.find('изменено') != -1:
-        prepare_result = result.replace('изменено:   ', '')
-        print (prepare_result.format() )
+        prepare_result = result.replace('\изменено:   ', '')
+        print(prepare_result)
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-~ /bin/python /run/media/alexandr/Data/DevOps/DevOps-netology/04-script-02-py/script/script2.py
+ ~ /bin/python /run/media/alexandr/Data/DevOps/DevOps-netology/04-script-02-py/script/script2.py
 /home/alexandr git не найден
-
-~ /bin/python /run/media/alexandr/Data/DevOps/DevOps-netology/04-script-02-py/script/script2.py /run/media/alexandr/Data/DevOps/DevOps-netology
-
-   04-script-02-py/README.md
-   04-script-02-py/script/script1.py
+ ~ /bin/python /run/media/alexandr/Data/DevOps/DevOps-netology/04-script-02-py/script/script2.py /run/media/alexandr/Data/DevOps/DevOps-netology
+        изменено:      04-script-02-py/README.md
+        изменено:      04-script-02-py/script/script2.py
 ```
 
 ## Обязательная задача 4

@@ -14,8 +14,9 @@ for result in result_os.split('\n'):
     if result.find('fatal') != -1:
         print(cmd+" git не найден")
     if result.find('изменено') != -1:
-        prepare_result = result.replace('изменено:   ', '')
-        print (prepare_result.format() )
+        prepare_result = result.replace('\изменено:   ', '')
+        print(prepare_result)
+
 
 
 # import sys
