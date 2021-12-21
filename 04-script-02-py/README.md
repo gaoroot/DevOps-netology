@@ -62,21 +62,33 @@ for result in result_os.split('\n'):
 
 import os
 
-bash_command = ["cd /run/media/alexandr/Data/DevOps/DevOps-netology", "git status"]
+cmd = os.getcwd()
+bash_command = ["cd "+cmd, "git status"]
 result_os = os.popen(' && '.join(bash_command)).read()
 for result in result_os.split('\n'):
     if result.find('изменено') != -1:
-        prepare_result = result.replace('\изменено:   ', '')
-        print(prepare_result)
+        prepare_result = result.replace('\tизменено:   ', '')
+        print(cmd+prepare_result)
 ```
 
 ### Вывод скрипта при запуске при тестировании:
+- В каталоге без git
+
 ```
-        изменено:      .idea/workspace.xml
-        изменено:      04-script-02-py/README.md
-        изменено:      04-script-02-py/script/script1.py
-        изменено:      test.txt
+    ~/test  ./script1.py                                                ✔ 
+fatal: не найден git репозиторий (или один из родительских каталогов): .git
 ```
+
+![](img/notgit.png)
+
+- В каталоге с git
+
+```
+    /run/me/a/D/De/DevOps-netology    main !2 ?1  ./script1.py       ✔ 
+/run/media/alexandr/Data/DevOps/DevOps-netology   04-script-02-py/README.md
+/run/media/alexandr/Data/DevOps/DevOps-netology   04-script-02-py/script/script1.py
+```
+![](img/git.png)
 
 ## Обязательная задача 3
 1. Доработать скрипт выше так, чтобы он мог проверять не только локальный репозиторий в текущей директории, а также умел воспринимать путь к репозиторию, который мы передаём как входной параметр. Мы точно знаем, что начальство коварное и будет проверять работу этого скрипта в директориях, которые не являются локальными репозиториями.
@@ -105,12 +117,14 @@ for result in result_os.split('\n'):
 
 ### Вывод скрипта при запуске при тестировании:
 ```
- ~ /bin/python /run/media/alexandr/Data/DevOps/DevOps-netology/04-script-02-py/script/script2.py
+~ /bin/python /run/media/alexandr/Data/DevOps/DevOps-netology/04-script-02-py/script/script2.py
 /home/alexandr git не найден
- ~ /bin/python /run/media/alexandr/Data/DevOps/DevOps-netology/04-script-02-py/script/script2.py /run/media/alexandr/Data/DevOps/DevOps-netology
+~ /bin/python /run/media/alexandr/Data/DevOps/DevOps-netology/04-script-02-py/script/script2.py /run/media/alexandr/Data/DevOps/DevOps-netology
         изменено:      04-script-02-py/README.md
         изменено:      04-script-02-py/script/script2.py
 ```
+
+![](img/git-dir.png)
 
 ## Обязательная задача 4
 1. Наша команда разрабатывает несколько веб-сервисов, доступных по http. Мы точно знаем, что на их стенде нет никакой балансировки, кластеризации, за DNS прячется конкретный IP сервера, где установлен сервис. Проблема в том, что отдел, занимающийся нашей инфраструктурой очень часто меняет нам сервера, поэтому IP меняются примерно раз в неделю, при этом сервисы сохраняют за собой DNS имена. Это бы совсем никого не беспокоило, если бы несколько раз сервера не уезжали в такой сегмент сети нашей компании, который недоступен для разработчиков. Мы хотим написать скрипт, который опрашивает веб-сервисы, получает их IP, выводит информацию в стандартный вывод в виде: <URL сервиса> - <его IP>. Также, должна быть реализована возможность проверки текущего IP сервиса c его IP из предыдущей проверки. Если проверка будет провалена - оповестить об этом в стандартный вывод сообщением: [ERROR] <URL сервиса> IP mismatch: <старый IP> <Новый IP>. Будем считать, что наша разработка реализовала сервисы: `drive.google.com`, `mail.google.com`, `google.com`.
