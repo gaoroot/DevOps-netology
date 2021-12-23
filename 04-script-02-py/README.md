@@ -131,12 +131,75 @@ for result in result_os.split('\n'):
 
 ### Ваш скрипт:
 ```python
-???
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import json
+import socket
+import time
+
+# while True:
+with open('srv.json') as json_file:
+    data = json.load(json_file)
+    for url in data['servers']:
+        urls = url['url']
+        # print('----url from json----')
+        print(urls)
+
+    for ip in data['servers']:
+        ips = ip['ip']
+        # print('----ip from json----')
+        print(ips)
+
+    for ipurl in data['servers']:
+        # print(urls)
+        ipurls = socket.gethostbyname(ipurl['url'])
+        # print(ipurls)
+
+        if ips == ipurls:
+            data['url'] = ipurls
+            print("{} - {}".format(urls, ipurls))
+        elif ips != ipurls:
+            print("[ERROR] {} IP mismatch: {} -> {}".format(urls, ips, ipurls))
+            data['url'] = ipurls
+    # time.sleep(1)
+```
+
+```json
+{
+  "servers": [
+    {
+      "id": 1,
+      "url": "drive.google.com",
+      "ip": "74.125.131.194"
+    },
+    {
+      "id": 2,
+      "url": "mail.google.com",
+      "ip": "108.177.14.19"
+    },
+    {
+      "id": 3,
+      "url": "google.com",
+      "ip": "216.58.209.174"
+    }
+  ]
+}
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+drive.google.com
+mail.google.com
+google.com
+74.125.131.194
+108.177.14.19
+216.58.209.174
+[ERROR] google.com IP mismatch: 216.58.209.174 -> 74.125.131.194
+[ERROR] google.com IP mismatch: 216.58.209.174 -> 216.58.210.133
+google.com - 216.58.209.174
+
+Process finished with exit code 0
 ```
 
 ## Дополнительное задание (со звездочкой*) - необязательно к выполнению
