@@ -131,75 +131,42 @@ for result in result_os.split('\n'):
 
 ### Ваш скрипт:
 ```python
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-import json
-import socket
-import time
-
-# while True:
-with open('srv.json') as json_file:
-    data = json.load(json_file)
-    for url in data['servers']:
-        urls = url['url']
-        # print('----url from json----')
-        print(urls)
-
-    for ip in data['servers']:
-        ips = ip['ip']
-        # print('----ip from json----')
-        print(ips)
-
-    for ipurl in data['servers']:
-        # print(urls)
-        ipurls = socket.gethostbyname(ipurl['url'])
-        # print(ipurls)
-
-        if ips == ipurls:
-            data['url'] = ipurls
-            print("{} - {}".format(urls, ipurls))
-        elif ips != ipurls:
-            print("[ERROR] {} IP mismatch: {} -> {}".format(urls, ips, ipurls))
-            data['url'] = ipurls
-    # time.sleep(1)
+#!/usr/bin/env python3                                                          
+import socket                                                                   
+import time                                                                     
+servers = {"drive.google.com": "", "mail.google.com": "",                       
+"google.com": ""}                                                               
+while True:                                                                     
+    for url, ip in servers.items():                                             
+        ip_addr = socket.gethostbyname(url)                                     
+        if ip == "":                                                            
+            servers[url] = ip_addr                                              
+            print("{} - {}".format(url, ip_addr))                               
+        elif ip != ip_addr:                                                     
+            print("[ERROR] {} IP mismatch: {} -> {}".format(url, ip,            
+ip_addr))                                                                       
+            servers[url] = ip_addr                                              
+    time.sleep(1)
 ```
-
-```json
-{
-  "servers": [
-    {
-      "id": 1,
-      "url": "drive.google.com",
-      "ip": "74.125.131.194"
-    },
-    {
-      "id": 2,
-      "url": "mail.google.com",
-      "ip": "108.177.14.19"
-    },
-    {
-      "id": 3,
-      "url": "google.com",
-      "ip": "216.58.209.174"
-    }
-  ]
-}
-```
-
 ### Вывод скрипта при запуске при тестировании:
 ```
-drive.google.com
-mail.google.com
-google.com
-74.125.131.194
-108.177.14.19
-216.58.209.174
-[ERROR] google.com IP mismatch: 216.58.209.174 -> 74.125.131.194
-[ERROR] google.com IP mismatch: 216.58.209.174 -> 216.58.210.133
-google.com - 216.58.209.174
-
-Process finished with exit code 0
+drive.google.com - 173.194.220.194
+mail.google.com - 64.233.162.19
+google.com - 173.194.222.113
+[ERROR] drive.google.com IP mismatch: 173.194.220.194 -> 142.250.150.194
+[ERROR] google.com IP mismatch: 173.194.222.113 -> 209.85.233.139
+[ERROR] drive.google.com IP mismatch: 142.250.150.194 -> 74.125.131.194
+[ERROR] google.com IP mismatch: 209.85.233.139 -> 74.125.131.101
+[ERROR] drive.google.com IP mismatch: 74.125.131.194 -> 142.250.150.194
+[ERROR] mail.google.com IP mismatch: 64.233.162.19 -> 74.125.131.83
+[ERROR] google.com IP mismatch: 74.125.131.101 -> 209.85.233.139
+[ERROR] drive.google.com IP mismatch: 142.250.150.194 -> 74.125.131.194
+[ERROR] google.com IP mismatch: 209.85.233.139 -> 74.125.131.101
+[ERROR] mail.google.com IP mismatch: 74.125.131.83 -> 64.233.161.19
+[ERROR] google.com IP mismatch: 74.125.131.101 -> 64.233.165.101
+[ERROR] drive.google.com IP mismatch: 74.125.131.194 -> 173.194.220.194
+[ERROR] drive.google.com IP mismatch: 173.194.220.194 -> 142.250.150.194
+[ERROR] google.com IP mismatch: 64.233.165.101 -> 209.85.233.139
 ```
 
 ## Дополнительное задание (со звездочкой*) - необязательно к выполнению
