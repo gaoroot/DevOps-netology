@@ -1,7 +1,53 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+$script = <<-SCRIPT
+echo I am provisioning...
+date > /etc/vagrant_provisioned_at
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+echo Installing Vault...
+sudo apt update && sudo apt -y install vault
+echo Installing Consul...
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt update && sudo apt -y install consul
+IP=$(ifconfig | awk -F '[:]' '/inet addr/ { print $3 }' | cut -d ' ' -f 1 | awk 'NR==2')
+cat > /vagrant/vault-server.hcl <<EOF
+disable_mlock = true
+ui            = true
+listener "tcp" {
+  address     = "0.0.0.0:8200"
+  tls_disable = "true"
+}
+storage "consul" {
+  address = "127.0.0.1:8500"
+  path    = "vault/"
+}
+EOF
+sleep 5s ; echo Ready To Start the Consul Server.
+mkdir consul-dir
+consul agent -server -bind=127.0.0.1 -data-dir=consul-dir --node master_consul -server -ui -client=0.0.0.0 -bootstrap-expect=1 >> /dev/null 2>&1 &
+sleep 20s ; echo Ready To Start the VAULT Server.
+vault server -config /vagrant/vault-server.hcl
+echo ">>>>>>USE THE BELOW COMMAND TO CHECK THE SERVER STATUS"
+echo ">>>>>>vagrant ssh"
+echo ">>>>>>vault status"
+echo ">>>>>>consul members"
+echo ">>>>>>To Acces vault and Consul"
+echo ">>>>>>$IP:8200"
+echo ">>>>>>$IP:8500"
+SCRIPT
 Vagrant.configure("2") do |config|
-    config.vm.define "pcs-devsys-diplom" do |subconfig|
-      subconfig.vm.box = "bento/ubuntu-20.04"
-      subconfig.vm.hostname = "pcs-devsys-diplom"
-      subconfig.vm.network :public_network, bridge: "enp8s0", ip: "192.168.100.200"
-    end
+  config.vm.provision "shell", inline: $script
+  config.vm.hostname = "vault"
+  config.vm.box = "bento/ubuntu-20.04"
+  config.vm.network "forwarded_port", guest: 8200, host: 8200
+  config.vm.network "forwarded_port", guest: 8500, host: 8500
+  #config.vm.network "public_network", bridge: "enp8s0", ip: "192.168.100.200" 
+
+  config.vm.provider "virtualbox" do |vb|
+      vb.name = "pcs-devsys-diplom"
+      vb.cpus = "2"
+      vb.memory = "4096"
+   end
 end
