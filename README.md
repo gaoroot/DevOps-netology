@@ -72,6 +72,11 @@
 
 * [pcs-devsys-diplom](pcs-devsys-diplom/README.md)
 
+---
+
+![GitHub last commit](https://img.shields.io/github/last-commit/gaoroot/DevOps-netology)
+
+---
 
 ##### Ответы по `git`
 ---
@@ -98,8 +103,6 @@ git commit -v
 5. Файлы override  
 6. Фалы terraformrc и terraform.rc  
 
-
-![GitHub last commit](https://img.shields.io/github/last-commit/gaoroot/DevOps-netology)
 
 
 
