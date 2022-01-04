@@ -7,7 +7,7 @@
 ## Задание
 
 1. Создайте виртуальную машину Linux.
-2. Установите ufw и разрешите к этой маш).ине сессии на порты 22 и 443, при этом трафик на интерфейсе localhost (lo) должен ходить свободно на все порты.
+2. Установите ufw и разрешите к этой машине сессии на порты 22 и 443, при этом трафик на интерфейсе localhost (lo) должен ходить свободно на все порты.
 3. Установите hashicorp vault ([инструкция по ссылке](https://learn.hashicorp.com/tutorials/vault/getting-started-install?in=vault/getting-started#install-vault)).
 4. Cоздайте центр сертификации по инструкции ([ссылка](https://learn.hashicorp.com/tutorials/vault/pki-engine?in=vault/secrets-management)) и выпустите сертификат для использования его в настройке веб-сервера nginx (срок жизни сертификата - месяц).
 5. Установите корневой сертификат созданного центра сертификации в доверенные в хостовой системе.
@@ -26,18 +26,69 @@
 Результатом курсовой работы должны быть снимки экрана или текст:
 
 - Процесс установки и настройки ufw
+
+  UFW устанавливается в Ubuntu по умолчанию
+
+  Отключение IPv6:  
+  `sudo nano /etc/default/ufw`  
+  `IPV6=yes` изменить на `IPV6=no`  
+
+  Настройки политик по умолчанию  
+  `sudo ufw default deny incoming`  
+  `sudo ufw default allow outgoing`  
+
+  Разрешить ssh   
+  `sudo ufw allow ssh`  
+  можно указать номер порта   
+  `sudo ufw allow 22`  
+  или если порт не стандарный  
+  `sudo ufw allow 2222`   
+
+  Активация UFW  
+  `sudo ufw enable`  
+
+  Чтобы посмотреть заданные правила  
+  `sudo ufw status verbose`  
+
+  Разрешить соединения HTTP на порту 80  
+  `sudo ufw allow http`   
+  или   
+  `sudo ufw allow 80`  
+  Разрешить соединения HTTPS на порту 443  
+  `sudo ufw allow https`   
+  или   
+  `sudo ufw allow 443`  
+
+![UFW](img/ufw.png)  
+
+Для интерфейса `lo`  
+
+Разрешить входящий траффик:  
+`sudo ufw allow in on lo to any`  
+Разрешить исходящий траффик:  
+`sudo ufw allow out on lo to any`  
+Проверить статус:  
+`sudo ufw status`  
+        
+![UFW lo](img/ufw-lo.png)
+
+
 - Процесс установки и выпуска сертификата с помощью hashicorp vault
+
+  - Установка Valut  
+  Добавить ключ  
+  `curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -`  
+  Добавить репозторий  
+  `sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"`  
+  Обновить и установить   
+  `sudo apt update && sudo apt install vault`  
+  Проверка установки  
+  `vault`
+
+![vault](img/vault.png)
+
+
 - Процесс установки и настройки сервера nginx
 - Страница сервера nginx в браузере хоста не содержит предупреждений 
 - Скрипт генерации нового сертификата работает (сертификат сервера ngnix должен быть "зеленым")
 - Crontab работает (выберите число и время так, чтобы показать что crontab запускается и делает что надо)
-
-## Как сдавать курсовую работу
-
-Курсовую работу выполните в файле readme.md в github репозитории. В личном кабинете отправьте на проверку ссылку на .md-файл в вашем репозитории.
-
-Также вы можете выполнить задание в [Google Docs](https://docs.google.com/document/u/0/?tgif=d) и отправить в личном кабинете на проверку ссылку на ваш документ.
-Если необходимо прикрепить дополнительные ссылки, просто добавьте их в свой Google Docs.
-
-Перед тем как выслать ссылку, убедитесь, что ее содержимое не является приватным (открыто на комментирование всем, у кого есть ссылка), иначе преподаватель не сможет проверить работу. 
-Ссылка на инструкцию [Как предоставить доступ к файлам и папкам на Google Диске](https://support.google.com/docs/answer/2494822?hl=ru&co=GENIE.Platform%3DDesktop).
