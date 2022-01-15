@@ -166,7 +166,8 @@ git commit -v
 
 1. [x] [Модуль 4. Скриптовые языки и языки разметки: Python, Bash, YAML, JSON](https://github.com/netology-code/sysadm-homeworks/tree/master/04-script-03-yaml/additional-info)
 
-
+---
+---
 
 # Домашние задания по курсу «Виртуализация, базы данных и Terraform»
 
