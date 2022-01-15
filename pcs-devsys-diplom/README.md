@@ -152,6 +152,12 @@ server {
 
 - Crontab работает (выберите число и время так, чтобы показать что crontab запускается и делает что надо)
 
+`crontab -e`   
+
 ![](img/cron.png)
+
+
+[vault-nginx.sh](vault-nginx.sh)
+
 ![](img/cert-script.png)
 
