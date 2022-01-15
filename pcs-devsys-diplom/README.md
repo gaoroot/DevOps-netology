@@ -87,8 +87,71 @@
 
 ![vault](img/vault.png)
 
+  - Выпускаю сертификаты с помощью скрипта [vault.sh](vault.sh) который создаёт сертификат      центра сертификации(rootCA.pem который в последствии необходимо добавить в доверенные "Центры сертификации" и все последующие автоматически созданные сертификаты будут достоверными) 
+
+
+
+
 
 - Процесс установки и настройки сервера nginx
-- Страница сервера nginx в браузере хоста не содержит предупреждений 
+
+`sudo apt update`  
+`sudo apt install nginx`  
+`systemctl start nginx`  
+`systemctl status nginx`  
+
+![nginx](img/nginx.png)
+
+
+Создаю конфигурайиооный файл `vault.test.local`  
+
+/etc/nginx/sites-available/vault.test.local  
+
+```
+server {
+        listen 80;
+        listen 443 ssl;
+    
+        ssl_certificate /etc/nginx/vault/vault.test.local.crt.pem;
+        ssl_certificate_key /etc/nginx/vault/vault.test.local.crt.key;
+        #ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+        #ssl_ciphers HIGH:!aNULL:!MD5;
+
+        root /var/www/vault.test.local/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name vault.test.local www.vault.test.local;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+
+```
+`systemctl restart nginx`  
+
+
+Для автоматического запуска  
+`sudo systemctl enable nginx`    
+
+
+
+- Страница сервера nginx в браузере хоста не содержит предупреждений  
+
+![](img/https-vault_test_local-ru.png)
+
+![](img/cert-crone-1min_1.png)
+
 - Скрипт генерации нового сертификата работает (сертификат сервера ngnix должен быть "зеленым")
+
+Генерирую сертификат скриптом [vault-nginx.sh](vault-nginx.sh)
+
+![](img/cert-crone-1min_1.png)
+![](img/cert-crone-1min_2.png)
+![](img/cert-crone-1min_3.png)
+
 - Crontab работает (выберите число и время так, чтобы показать что crontab запускается и делает что надо)
+
+![](img/cron.png)
+![](img/cert-script.png)
+

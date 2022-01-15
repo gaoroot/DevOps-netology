@@ -8,7 +8,7 @@
 # root: 262800h = 30 лет
 
 ca_street="Irkutsk"
-ca_org="Home DevOps-devsys10"
+ca_org="GovoriAO DevOps-devsys10"
 ca_ou="pcs-devsys-diplom"
 ca_url="https://vault.test.local"
 
