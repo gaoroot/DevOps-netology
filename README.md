@@ -68,9 +68,9 @@
 
 [04-script-03-yaml](04-script-03-yaml/README.md)
 
-## Курсовая работа по итогам модуля "DevOps и системное администрирование"
+## ✔ Курсовая работа по итогам модуля "DevOps и системное администрирование"
 
-* [pcs-devsys-diplom](pcs-devsys-diplom/README.md)
+[pcs-devsys-diplom](pcs-devsys-diplom/README.md)
 
 ---
 
