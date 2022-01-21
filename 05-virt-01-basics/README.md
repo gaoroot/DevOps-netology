@@ -100,17 +100,10 @@
 
 Пример volumes из docker-compose.yml   
 ```yaml
-db:
-container_name: mysite-db
-restart: always
-image: mysql:8.0
-volumes:
-    - ./volumes/mysite_db:/var/lib/mysql
-environment:
-    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-    - MYSQL_DATABASE=${MYSQL_DATABASE}
-    - MYSQL_USER=${MYSQL_USER}
-    - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-networks:
-    - backend
+  db:
+    container_name: mysite-db
+    restart: always
+    image: mysql:8.0
+    volumes:
+      - ./volumes/mysite_db:/var/lib/mysql
 ```
