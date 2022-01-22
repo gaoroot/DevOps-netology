@@ -54,3 +54,8 @@ Hey, Netology
 Воспроизвести практическую часть лекции самостоятельно.
 
 Соберите Docker образ с Ansible, загрузите на Docker Hub и пришлите ссылку вместе с остальными ответами к задачам.
+
+https://hub.docker.com/r/gaoroot/ansible
+
+https://hub.docker.com/r/gaoroot/nginx
+
