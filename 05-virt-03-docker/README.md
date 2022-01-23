@@ -21,6 +21,8 @@ Hey, Netology
 ```
 Опубликуйте созданный форк в своем репозитории и предоставьте ответ в виде ссылки на https://hub.docker.com/username_repo.
 
+https://hub.docker.com/r/gaoroot/nginx
+
 ## Задача 2
 
 Посмотрите на сценарий ниже и ответьте на вопрос:
@@ -49,6 +51,28 @@ Hey, Netology
 - Добавьте еще один файл в папку ```/data``` на хостовой машине;
 - Подключитесь во второй контейнер и отобразите листинг и содержание файлов в ```/data``` контейнера.
 
+Запускаю контейнер с образом `debian` и именем `debian` и подключаю папку `data`
+
+`docker run -it -d -v ~/docker/netology/data/:/data --name debian debian`  
+`docker exec -it debian /bin/bash`
+
+
+![](img/debian.png)
+
+`docker run -it -d -v ~/docker/netology/data/:/data --name centos centos`  
+`docker exec -it centos /bin/bash`
+
+![](img/centos.png)
+
+
+Создал файл на хостовой машине.  
+![](img/data.png)
+
+![](img/centos2.png)
+
+![](img/debian2.png)
+
+
 ## Задача 4 (*)
 
 Воспроизвести практическую часть лекции самостоятельно.
@@ -56,6 +80,4 @@ Hey, Netology
 Соберите Docker образ с Ansible, загрузите на Docker Hub и пришлите ссылку вместе с остальными ответами к задачам.
 
 https://hub.docker.com/r/gaoroot/ansible
-
-https://hub.docker.com/r/gaoroot/nginx
 
