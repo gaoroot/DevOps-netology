@@ -17,6 +17,8 @@
 docker node ls
 ```
 
+![](img/docker-node.png)
+
 ## Задача 3
 
 Создать ваш первый, готовый к боевой эксплуатации кластер мониторинга, состоящий из стека микросервисов.
@@ -25,6 +27,7 @@ docker node ls
 ```
 docker service ls
 ```
+![](img/docker-service.png)
 
 ## Задача 4 (*)
 
