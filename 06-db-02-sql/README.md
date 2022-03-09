@@ -190,6 +190,10 @@ EXPLAIN SELECT * FROM clients WHERE booking IS NOT NULL;
 
 План выполнения запроса и фильтр по полю booking.
 
+`cost=0.00..18.10` приблизительная стоимость запуска .. приблизительная общая стоимость запроса  
+`rows=806` означает ожидаемое число строк, которое должно быть выведено     
+`width=72` определяет ожидаемый средний размер строк в байтах   
+
 ## Задача 6
 
 Создайте бэкап БД test_db и поместите его в volume, предназначенный для бэкапов (см. Задачу 1).
@@ -227,13 +231,13 @@ user0@server:~/pg_2$ docker exec -it 5f891a4ccf6c /bin/bash
 bash-5.1#
 ```
 
-```
+```console
 bash-5.1# psql -U postgres -c 'CREATE DATABASE test_db;'
 CREATE DATABASE
 bash-5.1# psql -U postgres -d test_db -f backup/test_db.sql
 ```
 
-```
+```console
 postgres=# \l
                                  List of databases
    Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
