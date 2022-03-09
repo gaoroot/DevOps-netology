@@ -5,6 +5,9 @@
 
 Используя docker поднимите инстанс MySQL (версию 8). Данные БД сохраните в volume.
 
+[docker-compose.yml](docker-compose.yml)
+
+
 Изучите [бэкап БД](https://github.com/netology-code/virt-homeworks/tree/master/06-db-03-mysql/test_data) и 
 восстановитесь из него.
 
@@ -72,7 +75,7 @@ USE test_db;
 
 **Приведите в ответе** количество записей с `price` > 300.
 
-```console
+```sql
 mysql> SELECT * FROM orders WHERE price > 300;
 +----+----------------+-------+
 | id | title          | price |
@@ -170,7 +173,7 @@ mysql> SELECT TABLE_SCHEMA,ENGINE FROM information_schema.TABLES WHERE TABLE_SCH
 - Буффер кеширования 30% от ОЗУ
 - Размер файла логов операций 100 Мб
 
-Приведите в ответе измененный файл `my.cnf`.
+Приведите в ответе измененный файл [my.cnf](my.cnf).
 
 ```console
 [mysqld]
