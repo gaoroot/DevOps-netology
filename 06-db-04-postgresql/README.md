@@ -227,7 +227,7 @@ test_database=#
 ```sql
 ALTER TABLE orders RENAME TO orders_big;
 
-CREATE TABLE orders (id integer, title varchar(255), price integer) PARTITION BY RANGE(price);
+CREATE TABLE orders (id integer, title varchar(80), price integer) PARTITION BY RANGE(price);
 
 CREATE TABLE orders_1 PARTITION OF orders FOR VALUES FROM (500) TO (MAXVALUE);
 
@@ -239,15 +239,13 @@ SELECT * FROM orders_1;
 SELECT * FROM orders_2;
 ```
 
-```console
+```sql
 test_database=# ALTER TABLE orders RENAME TO orders_big;
 ALTER TABLE
-test_database=# CREATE TABLE orders (id integer, title varchar(255), price integer) PARTITION BY RANGE(price);
+test_database=# CREATE TABLE orders (id integer, title varchar(80), price integer) PARTITION BY RANGE(price);
 CREATE TABLE
 test_database=# CREATE TABLE orders_1 PARTITION OF orders FOR VALUES FROM (500) TO (MAXVALUE);
 ATE TABLECREATE TABLE
-test_database=# CREATE TABLE orders_1 PARTITION OF orders FOR VALUES FROM (500) TO (MAXVALUE);
-ERROR:  relation "orders_1" already exists
 test_database=# CREATE TABLE orders_2 PARTITION OF orders FOR VALUES FROM (MINVALUE) TO (500);
 CREATE TABLE
 test_database=# INSERT INTO orders (id, title, price) SELECT * FROM orders_big;
@@ -293,5 +291,16 @@ bash-5.1#
 ```
 
 Как бы вы доработали бэкап-файл, чтобы добавить уникальность значения столбца `title` для таблиц `test_database`?
+
+Доработать файл бекапа можно следующим образом, добавив `UNIQUE(title)`:
+
+```sql
+CREATE TABLE public.orders (
+    id integer NOT NULL,
+    title character varying(80) NOT NULL,
+    price integer DEFAULT 0,
+    UNIQUE(title)
+);
+```
 
 ---
