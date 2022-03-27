@@ -1,0 +1,33 @@
+# ======================== Elasticsearch Configuration =========================
+#
+#
+# ---------------------------------- Cluster -----------------------------------
+#
+# ------------------------------------ Node ------------------------------------
+#
+# Use a descriptive name for the node:
+#
+node.name: netology_test
+#
+# ----------------------------------- Paths ------------------------------------
+#
+# Path to directory where to store the data
+#
+path.data: /var/lib/data
+#
+# Path to log files:
+#
+path.logs: /var/lib/logs
+#
+# ----------------------------------- Memory -----------------------------------
+#
+# ---------------------------------- Network -----------------------------------
+#
+# Set the bind address to a specific IP (IPv4 or IPv6):
+#
+network.host: 0.0.0.0
+http.port: 9200
+# --------------------------------- Discovery ----------------------------------
+discovery.type: single-node
+# ---------------------------------- Various -----------------------------------
+xpack.security.enabled: false
