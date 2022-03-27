@@ -60,9 +60,9 @@ EXPOSE 9200
 
 https://hub.docker.com/repository/docker/gaoroot/elastic8
 
-- ответ `elasticsearch` на запрос пути `/` в json виде
+- ответ `elasticsearch` на запрос пути `/` в console виде
 
-```json
+```console
 {
   "name" : "netology_test",
   "cluster_name" : "elasticsearch",
@@ -109,8 +109,8 @@ https://hub.docker.com/repository/docker/gaoroot/elastic8
 
 Получите список индексов и их статусов, используя API и **приведите в ответе** на задание.
 
-```json
-user0@server:~$ curl -X PUT "localhost:9200/ind-1?pretty" -H 'Content-Type: application/json' -d'
+```console
+user0@server:~$ curl -X PUT "localhost:9200/ind-1?pretty" -H 'Content-Type: application/console' -d'
 > {
 >  "settings":{
 >   "number_of_shards": 1,
@@ -126,8 +126,8 @@ user0@server:~$ curl -X PUT "localhost:9200/ind-1?pretty" -H 'Content-Type: appl
 
 ```
 
-```json
-user0@server:~/es2$ curl -X PUT "localhost:9200/ind-2?pretty" -H 'Content-Type: application/json' -d'
+```console
+user0@server:~/es2$ curl -X PUT "localhost:9200/ind-2?pretty" -H 'Content-Type: application/console' -d'
 > {
 >  "settings":{
 >   "number_of_shards": 2,
@@ -143,8 +143,8 @@ user0@server:~/es2$ curl -X PUT "localhost:9200/ind-2?pretty" -H 'Content-Type: 
 
 ```
 
-```json
-user0@server:~/es2$ curl -X PUT "localhost:9200/ind-3?pretty" -H 'Content-Type: application/json' -d'
+```console
+user0@server:~/es2$ curl -X PUT "localhost:9200/ind-3?pretty" -H 'Content-Type: application/console' -d'
 > {
 >  "settings":{
 >   "number_of_shards": 4,
@@ -193,7 +193,7 @@ ind-3            0     r      UNASSIGNED
 
 ```
 
-```json
+```console
 user0@server:~/es2$ curl -X GET "localhost:9200/_cluster/health?pretty"
 {
   "cluster_name" : "elasticsearch",
@@ -220,7 +220,7 @@ user0@server:~/es2$ curl -X GET "localhost:9200/_cluster/health?pretty"
 
 Удалите все индексы.
 
-```json
+```console
 user0@server:~/es2$ curl -X DELETE "localhost:9200/ind-1?pretty"
 {
   "acknowledged" : true
@@ -237,7 +237,7 @@ user0@server:~/es2$ curl -X DELETE "localhost:9200/ind-3?pretty"
 
 
 Повторная проверка статуса green и шарды 100%   
-```json
+```console
 user0@server:~/es2$ curl -X GET "localhost:9200/_cluster/health?pretty"
 {
   "cluster_name" : "elasticsearch",
