@@ -276,7 +276,7 @@ user0@server:~/es2$ curl -X GET "localhost:9200/_cluster/health?pretty"
 
 **Приведите в ответе** запрос API и результат вызова API для создания репозитория.
 
-```json
+```console
 curl -X PUT "localhost:9200/_snapshot/netology_backup?pretty" -H 'Content-Type: application/json' -d'
 {
   "type": "fs",
@@ -293,7 +293,7 @@ curl -X PUT "localhost:9200/_snapshot/netology_backup?pretty" -H 'Content-Type: 
 
 Создайте индекс `test` с 0 реплик и 1 шардом и **приведите в ответе** список индексов.
 
-```json
+```console
 curl -X PUT "localhost:9200/test?pretty" -H 'Content-Type: application/json' -d'
 > {
 >   "settings": {
@@ -417,14 +417,14 @@ index-0  index.latest  indices  meta-SYmpFZh9TmKnjhQLE7RZPA.dat  snap-SYmpFZh9Tm
 
 Удалите индекс `test` и создайте индекс `test-2`. **Приведите в ответе** список индексов.
 
-```console
+```console 
 curl -X DELETE "localhost:9200/test?pretty"
 {
   "acknowledged" : true
 }
 ```
 
-```console
+```console 
 curl -X PUT "localhost:9200/test-2?pretty" -H 'Content-Type: application/json' -d'
 > {
 >   "settings": {
