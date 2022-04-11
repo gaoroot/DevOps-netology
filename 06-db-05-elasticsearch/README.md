@@ -470,7 +470,9 @@ green open test   Ly7USZj2QSahx8EI-9ZwVQ 1 0 0 0 225b 225b
 
 ---
 
-Пересобрал докер образ `gaoroot/elastic8-snap`
+Пересобрал докер образ `gaoroot/elastic8-snap`  
+
+https://hub.docker.com/repository/docker/gaoroot/elastic8-snap
 
 Dockerfile
 
@@ -528,3 +530,4 @@ discovery.type: single-node
 # ---------------------------------- Various -----------------------------------
 xpack.security.enabled: false
 ```
+
