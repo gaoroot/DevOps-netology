@@ -5,20 +5,28 @@
 1. Установить jenkins по любой из [инструкций](https://www.jenkins.io/download/)  
 docker-compose.yml
 ```yaml
-version: '3.6'
+version: '3.8'
 services:
   jenkins:
-    image: jenkins/jenkins:latest-jdk11
+    image: jenkins/jenkins:lts
     privileged: true
     user: root
-    container_name: "jenkins_lts-jdk11"
-    volumes:
-      - ./jenkins_home/:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock:rw
-      - /usr/bin/docker:/usr/bin/docker
     ports:
       - 8080:8080
-    restart: always
+      - 50000:50000
+    container_name: jenkins
+    volumes:
+      - /home/user0/jenkins_compose/jenkins_configuration:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+  agent:
+    image: jenkins/ssh-agent:jdk11
+    privileged: true
+    user: root
+    container_name: agent
+    expose:
+      - 22
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa key
 ```
 2. Запустить и проверить работоспособность
 ```
