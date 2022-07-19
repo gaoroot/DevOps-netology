@@ -27,4 +27,8 @@
 
 Если всё отработало в рамках ожидания - выгрузить схемы workflow для импорта в XML. Файлы с workflow приложить к решению задания.
 
+![](kanban.png)
+[Netology-kanban.xml](Netology-kanban.xml)
+
+
 ---
