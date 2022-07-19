@@ -30,34 +30,11 @@ services:
 ```
 2. Запустить и проверить работоспособность
 ```
-user0@server:~$ docker-compose up -d
-Pulling jenkins (jenkins/jenkins:latest-jdk11)...
-latest-jdk11: Pulling from jenkins/jenkins
-1339eaac5b67: Pull complete
-05901b0891d4: Pull complete
-f95dea4c489f: Pull complete
-5f2c45ee3c66: Pull complete
-6ce2320eefc8: Pull complete
-8489a45c4910: Pull complete
-3a2cf0755c15: Pull complete
-bf4a9b86ad6a: Pull complete
-bfd385f9c08b: Pull complete
-1c20bb2aae87: Pull complete
-fc54cc4c658c: Pull complete
-3deac8bc66c7: Pull complete
-bc4de5bf3bef: Pull complete
-75c0aa85ca62: Pull complete
-Digest: sha256:ee888f3d59da4f23efcb532bbfecb5c7c062679aec52835609370a0f23950daf
-Status: Downloaded newer image for jenkins/jenkins:latest-jdk11
-Creating jenkins_lts-jdk11 ... done
-user0@server:~$ docker-compose ps
-      Name                     Command               State                          Ports
-----------------------------------------------------------------------------------------------------------------
-jenkins_lts-jdk11   /usr/bin/tini -- /usr/loca ...   Up      50000/tcp, 0.0.0.0:8080->8080/tcp,:::8080->8080/tcp
-user0@server:~$
-user0@server:~$ docker exec jenkins_lts-jdk11 cat /var/jenkins_home/secrets/initialAdminPassword
-d298f646975548d6abc3685aaa4e640d
-user0@server:~$
+user0@server:~/jenkins$ docker-compose up -d
+[+] Running 3/3
+ ⠿ Network jenkins_default  Created                                                                                0.1s
+ ⠿ Container agent          Started                                                                                0.7s
+ ⠿ Container jenkins        Started                                                                                0.8s
 ```
 3. Сделать первоначальную настройку
 ![](img/jenkins1.png)
