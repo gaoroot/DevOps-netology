@@ -1,17 +1,18 @@
-node("ansible_docker"){
-    stage("Git checkout"){
-        git credentialsId: 'b11406ea-4c01-49a4-9d67-187f114bff50', url: 'git@github.com:gaoroot/example-playbook.git'
+
+pipeline {
+    agent {
+        label "ansible_docker"
     }
-    stage("Check ssh key"){
-        secret_check=true
-    }
-    stage("Run playbook"){
-        if (secret_check){
-            sh 'ansible-playbook site.yml -i inventory/prod.yml'
+
+    stages {
+        stage('prepare_node') {
+            steps {
+                git 'https://github.com/gaoroot/example-playbook.git'
+                sh 'ansible-vault decrypt secret --vault-password-file vault_pass'
+                sh 'mkdir ~/.ssh/ && mv ./secret ~/.ssh/id_rsa && chmod 400 ~/.ssh/id_rsa'
+                sh 'ansible-galaxy install -r requirements.yml -p roles'
+                sh 'ansible-playbook site.yml -i inventory/prod.yml'
+            }
         }
-        else{
-            echo 'no more keys'
-        }
-        
     }
 }

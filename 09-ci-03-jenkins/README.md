@@ -73,6 +73,11 @@ user0@server:~$
 7. Проверить работоспособность, исправить ошибки, исправленный Pipeline вложить в репозитрий в файл `ScriptedJenkinsfile`
 8. Отправить ссылку на репозиторий в ответе
 
+[ScriptedJenkinsfile](ScriptedJenkinsfile)
+
+![](img/jenkins_pipeline.png)
+![](img/jenkins_pipeline2.png)
+
 ## Необязательная часть
 
 1. Создать скрипт на groovy, который будет собирать все Job, которые завершились хотя бы раз неуспешно. Добавить скрипт в репозиторий с решеним с названием `AllJobFailure.groovy`
